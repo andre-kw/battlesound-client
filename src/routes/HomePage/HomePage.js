@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { store } from '../../store';
 import './HomePage.css';
+import ContestLink from '../../components/ContestLink/ContestLink';
 
 export default class HomePage extends React.Component {
   
@@ -10,15 +11,7 @@ export default class HomePage extends React.Component {
       <section className="home">
         <h2>Ongoing contests</h2>
         <div className="contests">
-          {store.contests.map(c => 
-            <Link to={'/contest/' + c.id} className="contest-ongoing">
-              <h3>{c.title}</h3>
-
-              <div className="stats">
-                <span className="stats-votes">34</span>
-              </div>
-            </Link>
-          )}
+          {store.contests.map(c => <ContestLink item={c} />)}
         </div>
       </section>
     );
