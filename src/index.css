@@ -20,13 +20,41 @@ main {
 
 section {
   max-width: 50em;
-  margin: 0 auto;
+  margin: 0 auto 3em;
   padding: 1em 2em 2.5em;
-  background: #f7f7f7;
+  background: #f9f9f9;
 }
 
 h2 {
-  border-bottom: 1px solid #a1e9ff;
+  border-bottom: 1px solid #ece4d2;
   padding: 0 0 .5em;
-  color: #6bdcff;
+  color: #d4c196;
+}
+
+h3 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: .7em 1em;
+}
+
+th {
+  font-variant: small-caps;
+  text-align: left;
+}
+
+.breadcrumb > a::after {
+  display: inline-block;
+  content: '//';
+  margin: 0 0.5em;
+  color: lightgray;
 }

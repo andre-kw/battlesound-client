@@ -4,25 +4,48 @@ export const store = {
       id: 1,
       title: 'Metro boomin official contest',
       href: 'metro-contest',
-      votes: 34
+      total_votes: 34,
+      total_submissions: 4
     },
     {
       id: 2,
-      title: 'House battle',
+      title: 'House battle royale',
       href: 'house-battle',
-      votes: 22
+      total_votes: 22,
+      total_submissions: 3
     },
     {
       id: 3,
       title: 'Darude Sandstorm remix battle',
       href: 'darude-remix-battle',
-      votes: 22
+      total_votes: 13,
+      total_submissions: 4
+    },
+    {
+      id: 4,
+      title: 'House battle',
+      href: 'house-battle',
+      total_votes: 59,
+      total_submissions: 7
+    },
+  ],
+
+  submissions: [
+    {
+      id: 1,
+      contest_id: 1,
+      user_id: 5,
+      username: 'coleworld',
+      title: 'middle child',
+      href: 'https://soundcloud.com/j-cole/middle-child',
     },
     {
       id: 2,
-      title: 'House battle',
-      href: 'house-battle',
-      votes: 22
+      contest_id: 1,
+      user_id: 15,
+      username: 'offset',
+      title: 'how did i get here',
+      href: 'https://soundcloud.com/offset-sc/how-did-i-get-here-feat-j-cole',
     },
   ]
 };

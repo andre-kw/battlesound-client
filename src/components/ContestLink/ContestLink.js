@@ -5,11 +5,11 @@ import './ContestLink.css';
 export default class ContestLink extends React.Component {
   render() {
     return (
-      <Link to={'/contest/' + this.props.item.id} className="contest-ongoing">
-        <h3>{this.props.item.title}</h3>
+      <Link to={'/contest/' + this.props.contest.id} className="contest-ongoing">
+        <h3>{this.props.contest.title}</h3>
 
         <div className="stats">
-          <span className="stats-votes">34</span>
+          <span className="stats-votes">{this.props.contest.total_votes} votes · {this.props.contest.total_submissions} submissions</span>
         </div>
       </Link>
     );

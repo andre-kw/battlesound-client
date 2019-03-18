@@ -11,7 +11,7 @@ export default class HomePage extends React.Component {
       <section className="home">
         <h2>Ongoing contests</h2>
         <div className="contests">
-          {store.contests.map(c => <ContestLink item={c} />)}
+          {store.contests.map(c => <ContestLink key={c.id} contest={c} />)}
         </div>
       </section>
     );

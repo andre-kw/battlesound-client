@@ -1,0 +1,15 @@
+.submissions-list tr td:first-of-type,
+.submissions-list tr td:last-of-type {
+  width: 1em;
+  font-size: 2em;
+  padding: 0.2em .25em;
+  text-align: center;
+}
+
+.btn-play {
+  color: rgb(28, 224, 110);
+}
+
+.btn-vote {
+  color: rgb(32, 98, 184);
+}
