@@ -58,3 +58,12 @@ th {
   margin: 0 0.5em;
   color: lightgray;
 }
+
+.alert {
+  margin: 3em 0 0;
+  padding: 1em;
+  text-align: center;
+  color: gray;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+}

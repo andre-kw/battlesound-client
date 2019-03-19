@@ -18,6 +18,7 @@ export default class ContestPage extends React.Component {
         total_votes: 0,
         total_submissions: 0
       },
+      submissions: [],
       nowPlaying: null
     };
   }
@@ -40,6 +41,26 @@ export default class ContestPage extends React.Component {
   }
 
   render() {
+    let submissionTable = <p className="alert">No submissions.</p>;
+
+    if(this.state.submissions.length > 0) {
+      submissionTable = (
+        <table className="submissions-list">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Track</th>
+              <th>Artist</th>
+              <th>Vote</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
+          </tbody>
+        </table>
+      );
+    }
+
     return (
     <>
       <h1>{this.state.contest.title}</h1>
@@ -51,27 +72,15 @@ export default class ContestPage extends React.Component {
 
         <h3>Now playing</h3>
         {(this.state.nowPlaying !== null) ?
-          <SCPlayer trackId={this.state.nowPlaying.id}/> :
-          ''
+          <SCPlayer trackId={this.state.nowPlaying.id} /> :
+          <div className="player-placeholder"><p>Nothing to play.</p></div>
         }
       </section>
 
 
       <section className="contest-submissions">
         <h3>Submissions</h3>
-        <table className="submissions-list">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Track</th>
-              <th>Artist</th>
-              <th>Vote</th>
-            </tr>
-          </thead>
-          <tbody>
-            {store.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
-          </tbody>
-        </table>
+        {submissionTable}
       </section>
     </>
     );

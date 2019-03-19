@@ -13,3 +13,14 @@
 .btn-vote {
   color: rgb(32, 98, 184);
 }
+
+.player-placeholder {
+  margin: 0;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+}

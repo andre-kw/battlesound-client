@@ -3,28 +3,24 @@ export const store = {
     {
       id: 1,
       title: 'Metro boomin official contest',
-      href: 'metro-contest',
       total_votes: 34,
       total_submissions: 4
     },
     {
       id: 2,
       title: 'House battle royale',
-      href: 'house-battle',
       total_votes: 22,
       total_submissions: 3
     },
     {
       id: 3,
       title: 'Darude Sandstorm remix battle',
-      href: 'darude-remix-battle',
       total_votes: 13,
       total_submissions: 4
     },
     {
       id: 4,
       title: 'House battle',
-      href: 'house-battle',
       total_votes: 59,
       total_submissions: 7
     },
@@ -41,7 +37,7 @@ export const store = {
     },
     {
       id: 2,
-      contest_id: 1,
+      contest_id: 2,
       user_id: 15,
       username: 'offset',
       title: 'how did i get here',
