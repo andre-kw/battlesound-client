@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { store } from '../../store';
+import ContestsService from '../services/contests';
+import ContestLink from '../components/ContestLink';
 import './HomePage.css';
-import ContestLink from '../../components/ContestLink/ContestLink';
-import ContestsService from '../../services/contests';
+import { store } from '../store';
 
 export default class HomePage extends React.Component {
   constructor(props) {

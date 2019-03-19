@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SC from 'soundcloud';
-import { store } from '../../store';
+import ContestSubmission from '../components/ContestSubmission';
+import SCPlayer from '../components/SCPlayer';
 import './ContestPage.css';
-import ContestSubmission from '../../components/ContestSubmission/ContestSubmission';
-import SCPlayer from '../../components/SCPlayer/SCPlayer';
+import { store } from '../store';
 
 export default class ContestPage extends React.Component {
   constructor(props) {

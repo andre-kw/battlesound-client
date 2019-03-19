@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Header from '../Header/Header';
+import LandingPage from '../routes/LandingPage';
+import LoginPage from '../routes/LoginPage';
+import HomePage from '../routes/HomePage';
+import ContestPage from '../routes/ContestPage';
+import Header from './Header';
 import './App.css';
-import LandingPage from '../../routes/LandingPage/LandingPage';
-import LoginPage from '../../routes/LoginPage/LoginPage';
-import HomePage from '../../routes/HomePage/HomePage';
-import ContestPage from '../../routes/ContestPage/ContestPage';
 
 class App extends Component {
   render() {
