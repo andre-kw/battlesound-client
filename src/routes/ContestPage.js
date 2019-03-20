@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
+import config from '../config';
 import './ContestPage.css';
 import { store } from '../store';
 
@@ -23,20 +24,22 @@ export default class ContestPage extends React.Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    const contest = store.contests.find(c => id == c.id);
-    const submissions = store.submissions.filter(s => id == s.contest_id);
-    const nowPlaying = (submissions.length > 0) ? submissions[0] : {};
-    const clientId = 'cQXBZEg50tuw0q10w3TGcKGBKADRLoOO';
+    const id = parseInt(this.props.match.params.id) || 0;
+    let submissions = [];
+    let nowPlaying = {};
 
-    if(nowPlaying.hasOwnProperty('href')) {
-      // SC.initialize({client_id: 'cQXBZEg50tuw0q10w3TGcKGBKADRLoOO'});
-      fetch(`http://api.soundcloud.com/resolve?url=${nowPlaying.href}&client_id=${clientId}`)
-        .then(res => res.json())
-        .then(json => {
-          this.setState({contest, submissions, nowPlaying: json});
-        });
-    }
+    fetch(`${config.API_ENDPOINT}/contests/${id}`)
+      .then(res => res.json())
+      .then(contest => {
+        submissions = contest.subs;
+        nowPlaying = (submissions.length > 0) ? submissions[0] : {};
+        delete contest.subs;
+        
+        this.setState({contest, submissions});
+
+      });
+
+    
   }
 
   render() {
@@ -60,9 +63,9 @@ export default class ContestPage extends React.Component {
       );
     }
 
-    return (
-    <>
+    return <>
       <h1>{this.state.contest.title}</h1>
+
       <section className="contest-nowplaying">
         <div className="breadcrumb">
           <Link to="/home">Home</Link>
@@ -70,18 +73,17 @@ export default class ContestPage extends React.Component {
         </div>
 
         <h3>Now playing</h3>
-        {(this.state.nowPlaying !== null) ?
-          <SCPlayer trackId={this.state.nowPlaying.id} /> :
-          <div className="player-placeholder"><p>Nothing to play.</p></div>
-        }
-      </section>
 
+        {(this.state.nowPlaying !== null)
+          ? <SCPlayer trackId={this.state.nowPlaying.id} />
+          : <div className="player-placeholder"><p>Nothing to play.</p></div>}
+      </section>
 
       <section className="contest-submissions">
         <h3>Submissions</h3>
+
         {submissionTable}
       </section>
-    </>
-    );
+    </>;
   }
 }
