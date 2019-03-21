@@ -48,8 +48,8 @@ export default class ContestPage extends React.Component {
       });
   }
 
-  checkIfSelected = (id) => {
-    if(typeof this.context.submissions !== 'undefined' && this.context.selectedSubIndex > -1) {
+  checkIfPlaying = (id) => {
+    if(this.context.submissions.length > 0 && this.context.selectedSubIndex > -1) {
       return id === this.context.submissions[this.context.selectedSubIndex].id;
     } else {
       return false;
@@ -69,11 +69,10 @@ export default class ContestPage extends React.Component {
               <th></th>
               <th>Track</th>
               <th>Artist</th>
-              <th>Vote</th>
             </tr>
           </thead>
           <tbody>
-            {this.context.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={this.checkIfSelected(s.id)} />)}
+            {this.context.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={this.checkIfPlaying(s.id || 0)} />)}
           </tbody>
         </table>
       </section>
@@ -95,6 +94,9 @@ export default class ContestPage extends React.Component {
             <section className="contest-nowplaying">
               <h3>Now playing</h3>
               <SCPlayer trackId={this.context.submissions[this.context.selectedSubIndex].id} />
+              <div className="track-controls">
+                <button className="btn-vote"><i className="fas fa-star"></i> <span>Vote for this track</span></button>
+              </div>
             </section>
           );
         } else {
@@ -105,7 +107,7 @@ export default class ContestPage extends React.Component {
 
     jsx = <>
       <section className="contest-header">
-        <h1>{this.state.contest.title}</h1>
+        <h1><p>⚔️</p>{this.state.contest.title}</h1>
         <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
         <p>12 slots remaining</p>
       </section>
@@ -113,7 +115,8 @@ export default class ContestPage extends React.Component {
       <div className="page-container">
         <div className="breadcrumb">
           <Link to="/home">Home</Link>
-          <span>Ongoing contest</span>
+          <span>Contest</span>
+          <span className="breadcrumb-status">Status: <em>ongoing</em></span>
         </div>
 
         {nowPlayingSection}

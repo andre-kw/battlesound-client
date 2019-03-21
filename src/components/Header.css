@@ -26,8 +26,9 @@ nav {
 .nav-left a p {
   margin: .5em;
   color: indianred;
-  font-variant: all-petite-caps;
-  font-size: 1.2em;
+  font-size: 0.8em;
+  font-family: 'cinzel decorative';
+  font-weight: bold;
 }
 
 .nav-right {

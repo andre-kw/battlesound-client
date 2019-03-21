@@ -1,18 +1,45 @@
-.submissions-list tr td:first-of-type,
-.submissions-list tr td:last-of-type {
+.submissions-list tr .sub-play {
   width: 1em;
   font-size: 2em;
-  padding: 0.2em .25em;
+  padding: .2em .5em;
   text-align: center;
 }
 
+.submissions-list tbody .sub-selected .sub-play {
+  background: #62d2bd;
+}
+
 .btn-play {
-  color: rgb(28, 224, 110);
+  color: #90e0b2;
+}
+
+tr:not(.sub-selected) .sub-play .btn-play:hover {
+  color: #2bdc2b;
   cursor: pointer;
 }
 
+.track-controls { padding: 1em 0; text-align: right }
+
 .btn-vote {
-  color: rgb(32, 98, 184);
+  padding: 0.5em 0.5em;
+  color: #ffe457;
+  text-shadow: 1px 2px 0px #d89b2c;
+  cursor: pointer;
+  font-size: 1.25em;
+  background: #f1f1f1;
+  border: 2px solid #d6d6d6;
+  border-radius: 3px;
+}
+
+.btn-vote span {
+  margin: 0 5px;
+  text-shadow: none;
+  color: gray;
+  font-size: 0.75em;
+}
+
+.btn-vote:hover {
+  color: #ffef9d;
 }
 
 .btn-contest-submit {
@@ -42,14 +69,34 @@
 
 .contest-header {
   max-width: 100%;
-  margin: 0 0 4em;
+  margin: 0 0 -1em;
   padding: 0;
   background: transparent;
   text-align: center;
+  min-height: 18em;
 }
 
 .contest-nowplaying h3 { color: #ff530e }
 
+.sub {
+  height: 5em;
+}
+
 .sub-selected {
-  background-color: #ffd3c1;
+  background-color: #b5edf5;
+  color: #272727;
+}
+
+.sub-selected .btn-play {
+  color: #fff;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .contest-header { min-height: 23em; padding: 2em 0 }
+}
+
+@media only screen and (max-width: 425px) {
+
+  .btn-vote { width: 100% }
 }
