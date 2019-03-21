@@ -9,7 +9,6 @@ export default class Header extends React.Component {
 
   handleLogout =() => {
     TokenService.clearAuthToken();
-    this.context.setUserLoggedIn(false);
   }
 
   renderAuthenticated() {

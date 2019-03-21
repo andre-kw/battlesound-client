@@ -10,7 +10,7 @@ import './ContestPage.css';
 
 export default class ContestPage extends React.Component {
   static contextType = AppContext;
-  
+
   constructor(props) {
     super(props);
 
@@ -22,17 +22,13 @@ export default class ContestPage extends React.Component {
         total_votes: 0,
         total_submissions: 0
       },
-      submissions: [],
       nowPlaying: null,
-      selectedIndex: -1,
       loading: true,
     };
   }
 
   componentDidMount() {
     const id = parseInt(this.props.match.params.id) || 0;
-    let submissions = [];
-    let nowPlaying = {};
 
     fetch(`${config.API_ENDPOINT}/contests/${id}`, {
       headers: {
@@ -41,12 +37,23 @@ export default class ContestPage extends React.Component {
     })
       .then(res => res.json())
       .then(contest => {
-        submissions = contest.subs;
-        let selectedIndex = (submissions.length > 0) ? 0 : -1;
+        this.context.setSubmissions(contest.subs);
+
+        if(contest.subs[0])
+          this.context.setSelectedSub(contest.subs[0].id);
+
         delete contest.subs;
 
-        this.setState({contest, submissions, selectedIndex, loading: false});
+        this.setState({contest, loading: false});
       });
+  }
+
+  checkIfSelected = (id) => {
+    if(typeof this.context.submissions !== 'undefined' && this.context.selectedSubIndex > -1) {
+      return id === this.context.submissions[this.context.selectedSubIndex].id;
+    } else {
+      return false;
+    }
   }
 
   render() {
@@ -66,7 +73,7 @@ export default class ContestPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={s.id === this.state.submissions[this.state.selectedIndex].id} />)}
+            {this.context.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={this.checkIfSelected(s.id)} />)}
           </tbody>
         </table>
       </section>
@@ -74,7 +81,7 @@ export default class ContestPage extends React.Component {
 
     if(! this.state.loading) {
       // when there's no submissions
-      if(this.state.submissions.length === 0) {
+      if(this.context.submissions.length === 0) {
         submissionsSection = '';
         nowPlayingSection = (
           <section className="contest-nowplaying">
@@ -83,11 +90,11 @@ export default class ContestPage extends React.Component {
         );
       } else {
         // when there are submissions
-        if(this.state.selectedIndex > -1) {
+        if(this.context.selectedSubIndex > -1) {
           nowPlayingSection = (
             <section className="contest-nowplaying">
               <h3>Now playing</h3>
-              <SCPlayer trackId={this.state.submissions[this.state.selectedIndex].id} />
+              <SCPlayer trackId={this.context.submissions[this.context.selectedSubIndex].id} />
             </section>
           );
         } else {
@@ -100,6 +107,7 @@ export default class ContestPage extends React.Component {
       <section className="contest-header">
         <h1>{this.state.contest.title}</h1>
         <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
+        <p>12 slots remaining</p>
       </section>
       
       <div className="page-container">

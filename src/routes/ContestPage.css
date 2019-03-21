@@ -28,7 +28,6 @@
   color: white;
   border-radius: 5px;
   text-decoration: none;
-  text-align: center;
 }
 
 .player-placeholder {
@@ -46,10 +45,11 @@
   margin: 0 0 4em;
   padding: 0;
   background: transparent;
+  text-align: center;
 }
 
 .contest-nowplaying h3 { color: #ff530e }
 
 .sub-selected {
-  background-color: gray;
+  background-color: #ffd3c1;
 }
