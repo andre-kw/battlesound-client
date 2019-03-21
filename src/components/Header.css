@@ -1,7 +1,8 @@
 nav {
   display: flex;
   justify-content: space-between;
-  margin: 2em auto;
+  margin: 0 auto;
+  padding: 1.5em 3em;
 }
 
 .nav-left {

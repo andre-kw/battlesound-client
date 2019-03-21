@@ -46,64 +46,70 @@ export default class ContestPage extends React.Component {
   }
 
   render() {
-    let nowPlayingSection;
+    let nowPlayingSection, jsx;
 
-    let submissionTable = (
-      <table className="submissions-list">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Track</th>
-            <th>Artist</th>
-            <th>Vote</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.loading
-            ? <Loader />
-            : this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
-        </tbody>
-      </table>
-    );
-
-    if(! this.state.loading && this.state.submissions.length === 0) {
-      submissionTable = <p className="alert">No submissions.</p>;
-    }
-
-    if(! this.state.loading) {
-      if(this.state.nowPlaying !== null) {
-        nowPlayingSection = <SCPlayer trackId={this.state.nowPlaying.id} />;
-      } else {
-        nowPlayingSection = <div className="player-placeholder"><p>Nothing to play.</p></div>;
-      }
-    } else {
-      nowPlayingSection = <Loader />;
-    }
-
-    return <>
-      <h1>{this.state.contest.title}</h1>
-
-      <div className="breadcrumb">
-        <Link to="/home">Home</Link>
-        <span>Contest</span>
-      </div>
-
-      <section className="contest-nowplaying">
-        <h3>Now playing</h3>
-
-        {nowPlayingSection}
-      </section>
-
-
-      <section className="contest-submit">
-        <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
-      </section>
-
+    let submissionsSection = (
       <section className="contest-submissions">
         <h3>Submissions</h3>
 
-        {submissionTable}
+        <table className="submissions-list">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Track</th>
+              <th>Artist</th>
+              <th>Vote</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
+          </tbody>
+        </table>
       </section>
+    );
+
+    if(! this.state.loading) {
+      // when there's no submissions
+      if(this.state.submissions.length === 0) {
+        submissionsSection = '';
+        nowPlayingSection = (
+          <section className="contest-nowplaying">
+            <div className="player-placeholder"><p>This contest is active but nobody has submitted anything yet.</p></div>
+          </section>
+        );
+      } else {
+        // when there are submissions
+        if(this.state.nowPlaying !== null) {
+          nowPlayingSection = (
+            <section className="contest-nowplaying">
+              <h3>Now playing</h3>
+              <SCPlayer trackId={this.state.nowPlaying.id} />
+            </section>
+          );
+        } else {
+          // nowPlayingSection = <div className="player-placeholder"><p>Please select a track.</p></div>;
+        }
+      }
+    }
+
+    jsx = <>
+      <section className="contest-header">
+        <h1>{this.state.contest.title}</h1>
+        <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
+      </section>
+      
+      <div className="page-container">
+        <div className="breadcrumb">
+          <Link to="/home">Home</Link>
+          <span>Ongoing contest</span>
+        </div>
+
+        {nowPlayingSection}
+
+        {submissionsSection}
+      </div>
     </>;
+
+    return this.state.loading ? <Loader /> : jsx;
   }
 }
