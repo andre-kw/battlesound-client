@@ -10,7 +10,7 @@ body {
 #root {
   max-width: 80em;
   margin: 0 auto;
-  padding: 0 10%;
+  padding: 0 20%;
 }
 
 section {
@@ -32,8 +32,7 @@ h1 p { margin: 10px; font-size: 0.8em; }
 h2 {
   border-bottom: 1px solid #e8e8e8;
   padding: 0 0 .5em;
-  color: #55b17a;
-  text-align: center;
+  color: #8e8e8e;
 }
 
 h3 {
@@ -106,4 +105,9 @@ th {
   max-width: 90vw;
   margin: 0 auto 5em;
   border: 1px solid #75d9fd;
+}
+
+
+@media only screen and (max-width: 768px) {
+  #root { padding: 0 5% }
 }

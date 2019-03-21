@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
-import {Loader} from '../components/Utils';
+import {Loader, Breadcrumb} from '../components/Utils';
 import TokenService from '../services/token';
 import AppContext from '../components/AppContext';
 import config from '../config';
@@ -113,11 +113,10 @@ export default class ContestPage extends React.Component {
       </section>
       
       <div className="page-container">
-        <div className="breadcrumb">
-          <Link to="/home">Home</Link>
+        <Breadcrumb>
           <span>Contest</span>
           <span className="breadcrumb-status">Status: <em>ongoing</em></span>
-        </div>
+        </Breadcrumb>
 
         {nowPlayingSection}
 

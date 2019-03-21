@@ -70,7 +70,7 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 .contest-header {
   max-width: 100%;
   margin: 0 0 -1em;
-  padding: 0;
+  padding: 2em 0;
   background: transparent;
   text-align: center;
   min-height: 18em;
@@ -93,7 +93,7 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 
 
 @media only screen and (max-width: 768px) {
-  .contest-header { min-height: 23em; padding: 2em 0 }
+  .contest-header { min-height: 23em }
 }
 
 @media only screen and (max-width: 425px) {

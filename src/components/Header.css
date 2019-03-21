@@ -6,6 +6,23 @@ nav {
   align-items: center;
 }
 
+nav a {
+  text-decoration: none;
+}
+
+nav a:link,
+nav a:visited { color: inherit }
+
+.nav-link {
+  margin: 0 0 0 1em;
+  padding: 1em;
+  background-color: #ececec;
+  border-radius: 5px;
+  font-size: 0.8em;
+}
+
+.nav-link.nav-logout { color: red }
+
 .nav-left {
   text-align: center;
 }
