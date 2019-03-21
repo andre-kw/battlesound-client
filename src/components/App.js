@@ -5,6 +5,7 @@ import LoginPage from '../routes/LoginPage';
 import HomePage from '../routes/HomePage';
 import ContestPage from '../routes/ContestPage';
 import Header from './Header';
+import { PrivateRoute, PublicOnlyRoute } from '../components/Utils';
 import './App.css';
 
 class App extends Component {
@@ -15,9 +16,9 @@ class App extends Component {
 
         <main>
           <Switch>
-            <Route exact path={'/'} component={LandingPage} />
             <Route exact path={'/login'} component={LoginPage} />
-            <Route path={'/home'} component={HomePage} />
+            <Route exact path={'/'} component={LandingPage} />
+            <Route exact path={'/home'} component={HomePage} />
             <Route path={'/contest/:id'} component={ContestPage} />
           </Switch>
         </main>

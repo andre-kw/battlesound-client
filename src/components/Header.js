@@ -40,8 +40,16 @@ export default class Header extends React.Component {
       <header>
         <nav>
           <div className="nav-left">
-            <Link to="/">Battlesound</Link>
+          <Link to={TokenService.hasAuthToken() ? '/home' : '/'}>
+              <img src="/img/crosshair.svg" className="logo" alt="logo"></img>
+              <p>Battlesound</p>
+            </Link>
           </div>
+
+          <div className="nav-center">
+            
+          </div>
+
           <div className="nav-right">
             {this.state.loggedIn
               ? this.renderAuthenticated()

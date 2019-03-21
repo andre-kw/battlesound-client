@@ -1,14 +1,39 @@
 nav {
   display: flex;
-  justify-content: space-between;
   margin: 0 auto;
-  padding: 1.5em 3em;
+  padding: 1.5em 0;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-left {
-  
+  text-align: center;
+}
+
+.nav-left a {
+  display: block;
+  margin: .5em;
+  font-size: 0.75em;
+  font-style: italic;
+  text-decoration: none;
+}
+
+.nav-left a:link,
+.nav-left a:visited {
+  color: gray;
+}
+
+.nav-left a p {
+  margin: .5em;
+  color: indianred;
+  font-variant: all-petite-caps;
+  font-size: 1.2em;
 }
 
 .nav-right {
   
+}
+
+.logo {
+  width: 3em;
 }
