@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
+import {Loader} from '../components/Utils';
+import TokenService from '../services/token';
 import config from '../config';
 import './ContestPage.css';
-import { store } from '../store';
-import TokenService from '../services/token';
 
 export default class ContestPage extends React.Component {
   constructor(props) {
@@ -21,6 +21,7 @@ export default class ContestPage extends React.Component {
       },
       submissions: [],
       nowPlaying: null,
+      loading: true,
     };
   }
 
@@ -37,48 +38,60 @@ export default class ContestPage extends React.Component {
       .then(res => res.json())
       .then(contest => {
         submissions = contest.subs;
-        nowPlaying = (submissions.length > 0) ? submissions[0] : {};
+        nowPlaying = (submissions.length > 0) ? submissions[0] : null;
         delete contest.subs;
 
-        this.setState({contest, submissions, nowPlaying});
+        this.setState({contest, submissions, nowPlaying, loading: false});
       });
   }
 
   render() {
-    let submissionTable = <p className="alert">No submissions.</p>;
+    let nowPlayingSection;
 
-    if(this.state.submissions.length > 0) {
-      submissionTable = (
-        <table className="submissions-list">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Track</th>
-              <th>Artist</th>
-              <th>Vote</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
-          </tbody>
-        </table>
-      );
+    let submissionTable = (
+      <table className="submissions-list">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Track</th>
+            <th>Artist</th>
+            <th>Vote</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.loading
+            ? <Loader />
+            : this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
+        </tbody>
+      </table>
+    );
+
+    if(! this.state.loading && this.state.submissions.length === 0) {
+      submissionTable = <p className="alert">No submissions.</p>;
+    }
+
+    if(! this.state.loading) {
+      if(this.state.nowPlaying !== null) {
+        nowPlayingSection = <SCPlayer trackId={this.state.nowPlaying.id} />;
+      } else {
+        nowPlayingSection = <div className="player-placeholder"><p>Nothing to play.</p></div>;
+      }
+    } else {
+      nowPlayingSection = <Loader />;
     }
 
     return <>
       <h1>{this.state.contest.title}</h1>
 
-      <section className="contest-nowplaying">
-        <div className="breadcrumb">
-          <Link to="/home">Home</Link>
-          <span>Contest</span>
-        </div>
+      <div className="breadcrumb">
+        <Link to="/home">Home</Link>
+        <span>Contest</span>
+      </div>
 
+      <section className="contest-nowplaying">
         <h3>Now playing</h3>
 
-        {(this.state.nowPlaying !== null)
-          ? <SCPlayer trackId={this.state.nowPlaying.id} />
-          : <div className="player-placeholder"><p>Nothing to play.</p></div>}
+        {nowPlayingSection}
       </section>
 
 

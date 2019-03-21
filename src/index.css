@@ -25,6 +25,13 @@ section {
   background: #f9f9f9;
 }
 
+h1 {
+  margin: 1.5em auto;
+  text-align: center;
+  font-size: 2.5em;
+  font-variant: small-caps;
+}
+
 h2 {
   border-bottom: 1px solid #ece4d2;
   padding: 0 0 .5em;
@@ -50,6 +57,13 @@ td, th {
 th {
   font-variant: small-caps;
   text-align: left;
+}
+
+.breadcrumb {
+  max-width: 50em;
+  margin: 0 auto;
+  padding: 1.25em 2em;
+  background-color: #e8e8e8;
 }
 
 .breadcrumb > a::after {
