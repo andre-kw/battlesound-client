@@ -5,6 +5,7 @@ import SCPlayer from '../components/SCPlayer';
 import config from '../config';
 import './ContestPage.css';
 import { store } from '../store';
+import TokenService from '../services/token';
 
 export default class ContestPage extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class ContestPage extends React.Component {
         total_submissions: 0
       },
       submissions: [],
-      nowPlaying: null
+      nowPlaying: null,
     };
   }
 
@@ -28,18 +29,19 @@ export default class ContestPage extends React.Component {
     let submissions = [];
     let nowPlaying = {};
 
-    fetch(`${config.API_ENDPOINT}/contests/${id}`)
+    fetch(`${config.API_ENDPOINT}/contests/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
       .then(res => res.json())
       .then(contest => {
         submissions = contest.subs;
         nowPlaying = (submissions.length > 0) ? submissions[0] : {};
         delete contest.subs;
-        
-        this.setState({contest, submissions});
 
+        this.setState({contest, submissions, nowPlaying});
       });
-
-    
   }
 
   render() {
@@ -77,6 +79,11 @@ export default class ContestPage extends React.Component {
         {(this.state.nowPlaying !== null)
           ? <SCPlayer trackId={this.state.nowPlaying.id} />
           : <div className="player-placeholder"><p>Nothing to play.</p></div>}
+      </section>
+
+
+      <section className="contest-submit">
+        <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
       </section>
 
       <section className="contest-submissions">
