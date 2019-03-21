@@ -1,8 +1,11 @@
 import React from 'react';
 import AuthService from '../services/auth';
 import TokenService from '../services/token';
+import AppContext from '../components/AppContext';
 
 export default class LoginPage extends React.Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -15,6 +18,7 @@ export default class LoginPage extends React.Component {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || '/home';
     history.push(destination);
+    this.context.setUserLoggedIn(true);
   }
 
   handleLoginSubmit = e => {

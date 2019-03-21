@@ -8,6 +8,7 @@
 
 .btn-play {
   color: rgb(28, 224, 110);
+  cursor: pointer;
 }
 
 .btn-vote {
@@ -48,3 +49,7 @@
 }
 
 .contest-nowplaying h3 { color: #ff530e }
+
+.sub-selected {
+  background-color: gray;
+}

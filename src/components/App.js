@@ -6,7 +6,6 @@ import HomePage from '../routes/HomePage';
 import ContestPage from '../routes/ContestPage';
 import Header from './Header';
 import { PrivateRoute, PublicOnlyRoute } from '../components/Utils';
-import './App.css';
 
 class App extends Component {
   render() {

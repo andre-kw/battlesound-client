@@ -4,10 +4,13 @@ import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
 import {Loader} from '../components/Utils';
 import TokenService from '../services/token';
+import AppContext from '../components/AppContext';
 import config from '../config';
 import './ContestPage.css';
 
 export default class ContestPage extends React.Component {
+  static contextType = AppContext;
+  
   constructor(props) {
     super(props);
 
@@ -21,6 +24,7 @@ export default class ContestPage extends React.Component {
       },
       submissions: [],
       nowPlaying: null,
+      selectedIndex: -1,
       loading: true,
     };
   }
@@ -38,10 +42,10 @@ export default class ContestPage extends React.Component {
       .then(res => res.json())
       .then(contest => {
         submissions = contest.subs;
-        nowPlaying = (submissions.length > 0) ? submissions[0] : null;
+        let selectedIndex = (submissions.length > 0) ? 0 : -1;
         delete contest.subs;
 
-        this.setState({contest, submissions, nowPlaying, loading: false});
+        this.setState({contest, submissions, selectedIndex, loading: false});
       });
   }
 
@@ -62,7 +66,7 @@ export default class ContestPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} />)}
+            {this.state.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={s.id === this.state.submissions[this.state.selectedIndex].id} />)}
           </tbody>
         </table>
       </section>
@@ -79,11 +83,11 @@ export default class ContestPage extends React.Component {
         );
       } else {
         // when there are submissions
-        if(this.state.nowPlaying !== null) {
+        if(this.state.selectedIndex > -1) {
           nowPlayingSection = (
             <section className="contest-nowplaying">
               <h3>Now playing</h3>
-              <SCPlayer trackId={this.state.nowPlaying.id} />
+              <SCPlayer trackId={this.state.submissions[this.state.selectedIndex].id} />
             </section>
           );
         } else {

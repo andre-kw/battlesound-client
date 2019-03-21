@@ -1,24 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../services/token';
+import AppContext from './AppContext';
 import './Header.css';
 
 export default class Header extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      loggedIn: false
-    };
-  }
-
-  handleLogin =() => {
-    this.setState({loggedIn: true});
-  }
+  static contextType = AppContext;
 
   handleLogout =() => {
     TokenService.clearAuthToken();
-    this.setState({loggedIn: false});
+    this.context.setUserLoggedIn(false);
   }
 
   renderAuthenticated() {
@@ -31,7 +22,7 @@ export default class Header extends React.Component {
 
   renderUnauthenticated() {
     return (
-      <Link to="/login" onClick={this.handleLogin}>Login</Link>
+      <Link to="/login">Login</Link>
     );
   }
 
@@ -51,7 +42,7 @@ export default class Header extends React.Component {
           </div>
 
           <div className="nav-right">
-            {this.state.loggedIn
+            {this.context.isLoggedIn
               ? this.renderAuthenticated()
               : this.renderUnauthenticated()}
           </div>
