@@ -58,6 +58,13 @@ th {
   text-align: left;
 }
 
+input[type="submit"] { cursor: pointer }
+
+input[type="submit"]:not([disabled]) {
+  background: #5eb3ff;
+  color: #fff;
+}
+
 .breadcrumb {
   margin: 0 auto;
   padding: 1.25em 2em;
@@ -106,6 +113,19 @@ th {
   margin: 0 auto 5em;
   border: 1px solid #75d9fd;
 }
+
+.hidden { display: none }
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+  padding: 0.7em;
+  margin: 1em 0;
+  border: 1px solid gray;
+  border-radius: 4px;
+}
+
 
 
 @media only screen and (max-width: 768px) {

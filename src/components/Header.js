@@ -9,7 +9,7 @@ export default class Header extends React.Component {
 
   renderAuthenticated() {
     return <>
-      <Link to="/" className="nav-link" onClick={console.log('hq')}><i className="fas fa-chess-king"></i> HQ</Link>
+      <Link to="/" className="nav-link"><i className="fas fa-chess-king"></i> HQ</Link>
       <Link to="/" className="nav-link nav-logout" onClick={this.context.handleLogout}><i className="fas fa-sign-out-alt"></i> Logout</Link>
     </>;
   }

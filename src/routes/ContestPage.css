@@ -45,7 +45,7 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 .btn-contest-submit {
   display: flex;
   margin: 0 auto;
-  padding: .5em;
+  padding: .5em 1em;
   width: 25%;
   min-width: 7em;
   height: 2.5em;
@@ -74,6 +74,10 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   background: transparent;
   text-align: center;
   min-height: 18em;
+}
+
+.contest-header.small {
+  min-height: 5em;
 }
 
 .contest-nowplaying h3 { color: #ff530e }
