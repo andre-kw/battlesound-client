@@ -3,12 +3,14 @@ import TokenService from '../services/token';
 import AuthService from '../services/auth';
 
 const AppContext = React.createContext({
-  isUserLoggedIn: false,
+  isUserLoggedIn: TokenService.hasAuthToken(),
+  contest: {},
   submissions: [],
   selectedSubIndex: -1,
   handleLoginSubmit: () => {},
   handleLogout: () => {},
-  setSubmissions: () => {},
+  setLoading: () => {},
+  setContest: () => {},
   setSelectedSub: () => {},
 });
 
@@ -17,7 +19,9 @@ export default AppContext;
 
 export class AppProvider extends Component {
   state = {
-    isUserLoggedIn: false,
+    loading: true,
+    isUserLoggedIn: TokenService.hasAuthToken(),
+    contest: {},
     submissions: [],
     selectedSubIndex: -1,
   }
@@ -48,23 +52,33 @@ export class AppProvider extends Component {
     this.setState({isUserLoggedIn: false});
   }
 
-  setSubmissions = (submissions) => {
-    this.setState({submissions});
+  setLoading = (val) => {
+    this.setState({loading: val});
   }
 
-  setSelectedSub = (id) => {
-    const index = this.state.submissions.findIndex(s => s.id === id);
-    this.setState({selectedSubIndex: index});
+  setContest = (contest) => {
+    let submissions = contest.subs;
+    this.setState({contest, submissions});
+  }
+
+  setSelectedSub = (sub) => {
+    if(typeof sub !== 'undefined') {
+      const index = this.state.submissions.findIndex(s => s.id === sub.id);
+      this.setState({selectedSubIndex: index});
+    }
   }
 
   render() {
     const value = {
+      loading: this.state.loading,
       isUserLoggedIn: this.state.isUserLoggedIn,
+      contest: this.state.contest,
       submissions: this.state.submissions,
       selectedSubIndex: this.state.selectedSubIndex,
       handleLoginSubmit: this.handleLoginSubmit,
       handleLogout: this.handleLogout,
-      setSubmissions: this.setSubmissions,
+      setLoading: this.setLoading,
+      setContest: this.setContest,
       setSelectedSub: this.setSelectedSub,
     }
 

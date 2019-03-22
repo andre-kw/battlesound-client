@@ -7,6 +7,7 @@ import TokenService from '../services/token';
 import AppContext from '../components/AppContext';
 import config from '../config';
 import './ContestPage.css';
+import ContestSubmitPage from './ContestSubmitPage';
 
 export default class ContestPage extends React.Component {
   static contextType = AppContext;
@@ -15,19 +16,13 @@ export default class ContestPage extends React.Component {
     super(props);
 
     this.state = {
-      contest: {
-        id: 0,
-        title: '',
-        href: '',
-        total_votes: 0,
-        total_submissions: 0
-      },
       nowPlaying: null,
-      loading: true,
     };
   }
 
   componentDidMount() {
+    this.context.setLoading(true);
+
     const id = parseInt(this.props.match.params.id) || 0;
 
     fetch(`${config.API_ENDPOINT}/contests/${id}`, {
@@ -37,14 +32,9 @@ export default class ContestPage extends React.Component {
     })
       .then(res => res.json())
       .then(contest => {
-        this.context.setSubmissions(contest.subs);
-
-        if(contest.subs[0])
-          this.context.setSelectedSub(contest.subs[0].id);
-
-        delete contest.subs;
-
-        this.setState({contest, loading: false});
+        this.context.setContest(contest);
+        this.context.setSelectedSub(contest.subs[0]);
+        this.context.setLoading(false);
       });
   }
 
@@ -56,7 +46,29 @@ export default class ContestPage extends React.Component {
     }
   }
 
+  redirect = () => {
+    this.props.history.push(this.props.location.pathname);
+  }
+
   render() {
+    /* FOR THE FUTURE
+      if(this.state.contest.completed) {
+        return <ContestCompletedPage />
+      }
+    */
+
+    if(this.context.loading) {
+      return <Loader />;
+    }
+
+    if(this.props.location.hash === '#submit') {
+      if(TokenService.hasAuthToken()) {
+        return <ContestSubmitPage contestId={this.props.match.params.id} redirect={this.redirect} />;
+      } else {
+        this.props.history.push('/login');
+      }
+    }
+
     let nowPlayingSection, jsx;
 
     let submissionsSection = (
@@ -78,7 +90,7 @@ export default class ContestPage extends React.Component {
       </section>
     );
 
-    if(! this.state.loading) {
+    if(! this.context.loading) {
       // when there's no submissions
       if(this.context.submissions.length === 0) {
         submissionsSection = '';
@@ -107,14 +119,14 @@ export default class ContestPage extends React.Component {
 
     jsx = <>
       <section className="contest-header">
-        <h1><p>⚔️</p>{this.state.contest.title}</h1>
-        <Link to={`/contest/${this.state.contest.id}/submission`} className="btn-contest-submit">Enter your submission</Link>
+        <h1><p>⚔️</p>{this.context.contest.title}</h1>
+        <Link to={`/contest/${this.context.contest.id}#submit`} className="btn-contest-submit">Enter your submission</Link>
         <p>12 slots remaining</p>
       </section>
       
       <div className="page-container">
         <Breadcrumb>
-          <span>Contest</span>
+          <span>Contest page</span>
           <span className="breadcrumb-status">Status: <em>ongoing</em></span>
         </Breadcrumb>
 
@@ -124,6 +136,6 @@ export default class ContestPage extends React.Component {
       </div>
     </>;
 
-    return this.state.loading ? <Loader /> : jsx;
+    return jsx;
   }
 }
