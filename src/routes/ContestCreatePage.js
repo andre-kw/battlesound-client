@@ -17,7 +17,7 @@ export default class ContestCreatePage extends Component {
   serializeInput = (data) => {
     return {
       title: data.title.value,
-      creator: this.context.userId
+      creator: this.context.user.id
     };
   }
 
@@ -49,6 +49,10 @@ export default class ContestCreatePage extends Component {
   }
 
   render() {
+    if(! TokenService.hasAuthToken()) {
+      this.props.history.push('/login');
+    }
+
     let jsx = <>
       <section className="contest-header small">
         <h1><p>🔫</p>Start a war</h1>

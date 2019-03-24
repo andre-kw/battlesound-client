@@ -4,11 +4,12 @@ import AuthService from '../services/auth';
 
 const AppContext = React.createContext({
   isUserLoggedIn: TokenService.hasAuthToken(),
-  userId: 0,
+  user: JSON.parse(window.localStorage.user || '{}'),
   contest: {},
   submissions: [],
   selectedSubIndex: -1,
   error: '',
+  handleLogin: () => {},
   handleLoginSubmit: () => {},
   handleLogout: () => {},
   setLoading: () => {},
@@ -22,11 +23,26 @@ export default AppContext;
 export class AppProvider extends Component {
   state = {
     loading: true,
-    userId: 0,
+    user: JSON.parse(window.localStorage.user || '{}'),
     isUserLoggedIn: TokenService.hasAuthToken(),
     contest: {},
     submissions: [],
     selectedSubIndex: -1,
+  }
+
+  handleLogin = (credentials, callback = () => {}) => {
+    AuthService.postLogin(credentials)
+      .then(json => {
+        TokenService.saveAuthToken(json.authToken);
+        window.localStorage.user = JSON.stringify({id: json.id});
+        this.setState({isUserLoggedIn: true});
+
+        callback();
+      })
+      .catch(err => {
+        this.setLoading(false);
+        this.setState({error: err.error});
+      });
   }
 
   handleLoginSubmit = (e, callback) => {
@@ -34,26 +50,15 @@ export class AppProvider extends Component {
     this.setLoading(true);
     const { username: un, password: pw } = e.target;
 
-    AuthService.postLogin({
-        username: un.value,
-        password: pw.value,
-      })
-      .then(json => {
-        un.value = '';
-        pw.value = '';
+    this.handleLogin({username: un.value, password: pw.value}, callback);
 
-        TokenService.saveAuthToken(json.authToken);
-        this.setState({isUserLoggedIn: true, userId: json.id});
-
-        callback();
-      })
-      .catch(err => {
-        this.setState({error: err.error});
-      })
+    un.value = '';
+    pw.value = '';
   }
 
   handleLogout = () => {
     TokenService.clearAuthToken();
+    window.localStorage.removeItem('user');
     this.setState({isUserLoggedIn: false});
   }
 
@@ -65,22 +70,20 @@ export class AppProvider extends Component {
     this.setState({contest, submissions: contest.subs || []});
   }
 
-  setSelectedSub = (sub) => {
-    if(typeof sub !== 'undefined') {
-      const index = this.state.submissions.findIndex(s => s.id === sub.id);
-      this.setState({selectedSubIndex: index});
-    }
+  setSelectedSub = (index) => {
+    this.setState({selectedSubIndex: index});
   }
 
   render() {
     const value = {
       loading: this.state.loading,
       isUserLoggedIn: this.state.isUserLoggedIn,
-      userId: this.state.userId,
+      user: this.state.user,
       contest: this.state.contest,
       submissions: this.state.submissions,
       selectedSubIndex: this.state.selectedSubIndex,
       error: this.state.error,
+      handleLogin: this.handleLogin,
       handleLoginSubmit: this.handleLoginSubmit,
       handleLogout: this.handleLogout,
       setLoading: this.setLoading,

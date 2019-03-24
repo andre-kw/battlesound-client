@@ -21,6 +21,10 @@ export default class ContestPage extends React.Component {
   }
 
   componentDidMount() {
+    this.grabData();
+  }
+
+  grabData = () => {
     this.context.setLoading(true);
 
     const id = parseInt(this.props.match.params.id) || 0;
@@ -40,14 +44,6 @@ export default class ContestPage extends React.Component {
       });
   }
 
-  checkIfPlaying = (id) => {
-    if(this.context.submissions.length > 0 && this.context.selectedSubIndex > -1) {
-      return id === this.context.submissions[this.context.selectedSubIndex].id;
-    } else {
-      return false;
-    }
-  }
-
   redirect = () => {
     this.props.history.push(this.props.location.pathname);
   }
@@ -65,7 +61,7 @@ export default class ContestPage extends React.Component {
 
     if(this.props.location.hash === '#submit') {
       if(TokenService.hasAuthToken()) {
-        return <ContestSubmitPage contestId={this.props.match.params.id} redirect={this.redirect} />;
+        return <ContestSubmitPage contestId={this.props.match.params.id} redirect={this.redirect} grabData={this.grabData} />;
       } else {
         this.props.history.push('/login');
       }
@@ -86,7 +82,7 @@ export default class ContestPage extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.context.submissions.map(s => <ContestSubmission key={s.id} submission={s} isPlaying={this.checkIfPlaying(s.id || 0)} />)}
+            {this.context.submissions.map((s, index) => <ContestSubmission key={`${s.id} - ${index}`} index={index} submission={s} />)}
           </tbody>
         </table>
       </section>

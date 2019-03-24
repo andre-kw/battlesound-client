@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthService from '../services/auth';
 import AppContext from '../components/AppContext';
+import { Loader } from '../components/Utils';
 
 export default class RegisterPage extends React.Component {
   static contextType = AppContext;
@@ -11,6 +12,10 @@ export default class RegisterPage extends React.Component {
     this.state = {
       error: null
     };
+  }
+
+  componentDidMount() {
+    this.context.setLoading(false);
   }
 
   onLoginSuccess = () => {
@@ -27,9 +32,19 @@ export default class RegisterPage extends React.Component {
     const pwdsMatch = (password === passwordConfirm);
 
     if(pwdsMatch) {
+      this.context.setLoading(true);
+
       AuthService.postRegister({username, password})
         .then(res => {
-          this.context.handleLogin(e, this.onLoginSuccess)
+          if(res.ok) {
+            this.context.handleLogin({username, password}, this.onLoginSuccess)
+          } else {
+            throw new Error();
+          }
+        })
+        .catch(err => {
+          this.context.setLoading(false);
+          this.setState({error: "Could not create user. Try a different one."});
         })
     } else {
       this.setState({error: 'Passwords do not match'});
@@ -37,19 +52,21 @@ export default class RegisterPage extends React.Component {
   }
 
   render() {
-    return <>
+    let jsx = <>
       {this.state.error ? <div className="alert">{this.state.error}</div> : ''}
 
       <section className="register">
         <div className="login-form">
           <form onSubmit={(e) => this.handleRegisterSubmit(e)}>
-            <input type="text" name="username" placeholder="Username" class="form-control" required></input>
-            <input type="password" name="password" placeholder="Password" class="form-control" required></input>
-            <input type="password" name="password_confirm" placeholder="Confirm password" class="form-control" required></input>
-            <input type="submit" value="Register" class="form-control"></input>
+            <input type="text" name="username" placeholder="Username" className="form-control" required></input>
+            <input type="password" name="password" placeholder="Password" className="form-control" required></input>
+            <input type="password" name="password_confirm" placeholder="Confirm password" className="form-control" required></input>
+            <input type="submit" value="Register" className="form-control"></input>
           </form>
         </div>
       </section>
     </>;
+
+    return this.context.loading ? <Loader /> : jsx;
   }
 }

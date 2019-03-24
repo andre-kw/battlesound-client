@@ -10,12 +10,7 @@ const AuthService = {
       body: JSON.stringify(data)
     };
 
-    return fetch(`${config.API_ENDPOINT}/auth/register`, options)
-      .then(res => {
-        return (! res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json(); 
-      });
+    return fetch(`${config.API_ENDPOINT}/auth/register`, options);
   },
 
   postLogin(credentials) {

@@ -16,6 +16,10 @@ export default class ContestSubmitPage extends Component {
     };
   }
 
+  componentWillMount() {
+    // TODO: check if user has already submitted
+  }
+
   validateUrl = (e) => {
     if(isUrl(e.target.value)) {
       this.setState({validUrl: true});
@@ -28,7 +32,7 @@ export default class ContestSubmitPage extends Component {
     return {
       sc_url: data.sc_url.value,
       contest_id: this.context.contest.id,
-      user_id: this.context.userId
+      user_id: this.context.user.id
     };
   } 
 
@@ -47,6 +51,7 @@ export default class ContestSubmitPage extends Component {
       .then(() => {
         this.props.redirect();
         this.context.setLoading(false);
+        this.props.grabData();
       });
   }
 
