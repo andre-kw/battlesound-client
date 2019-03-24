@@ -2,8 +2,12 @@ import React from 'react';
 import ContestsService from '../services/contests';
 import ContestLink from '../components/ContestLink';
 import './HomePage.css';
+import AppContext from '../components/AppContext';
+import { Loader } from '../components/Utils';
 
 export default class HomePage extends React.Component {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
 
@@ -15,12 +19,13 @@ export default class HomePage extends React.Component {
   componentDidMount() {
     ContestsService.getContests()
       .then(json => {
+        this.context.setLoading(false);
         this.setState({contests: json})
       })
   }
 
   render() {
-    return (
+    let jsx = (
       <div className="page-container">
         <section className="home">
           <h2>Ongoing contests</h2>
@@ -30,5 +35,7 @@ export default class HomePage extends React.Component {
         </section>
       </div>
     );
+
+    return this.context.loading ? <Loader /> : jsx;
   }
 }
