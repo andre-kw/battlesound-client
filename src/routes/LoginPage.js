@@ -1,6 +1,4 @@
 import React from 'react';
-import AuthService from '../services/auth';
-import TokenService from '../services/token';
 import AppContext from '../components/AppContext';
 
 export default class LoginPage extends React.Component {

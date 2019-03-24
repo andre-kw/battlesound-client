@@ -31,7 +31,7 @@ export default class HomePage extends React.Component {
         <section className="home">
           <div className="header-w-link">
             <h2>Ongoing contests</h2>
-            <Link to="/contest/create" class="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
+            <Link to="/contest/create" className="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
           </div>
 
           <div className="contests">
