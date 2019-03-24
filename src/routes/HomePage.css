@@ -3,3 +3,14 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.header-w-link {
+  display: flex;
+  padding: 1em 0 2em;
+  align-items: center;
+}
+
+.header-w-link h2 {
+  margin: 0;
+  flex: 8;
+}

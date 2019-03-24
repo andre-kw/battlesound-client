@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ContestsService from '../services/contests';
 import ContestLink from '../components/ContestLink';
 import './HomePage.css';
@@ -28,7 +29,11 @@ export default class HomePage extends React.Component {
     let jsx = (
       <div className="page-container">
         <section className="home">
-          <h2>Ongoing contests</h2>
+          <div className="header-w-link">
+            <h2>Ongoing contests</h2>
+            <Link to="/contest/create" class="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
+          </div>
+
           <div className="contests">
             {this.state.contests.map(c => <ContestLink key={c.id} contest={c} />)}
           </div>
