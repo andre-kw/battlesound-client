@@ -6,14 +6,6 @@ import AppContext from '../components/AppContext';
 export default class LoginPage extends React.Component {
   static contextType = AppContext;
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      error: null
-    };
-  }
-
   onLoginSuccess = () => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || '/home';
@@ -23,7 +15,7 @@ export default class LoginPage extends React.Component {
   render() {
     return (
       <section className="login">
-        {(this.state.error) ? <div className="alert">There was a problem</div> : ''}
+        {(this.context.error) ? <div className="alert">That didn't work. Try again.</div> : ''}
         <div className="login-form">
           <form onSubmit={(e) => this.context.handleLoginSubmit(e, this.onLoginSuccess)}>
             <input type="text" name="username" placeholder="Username" required></input>

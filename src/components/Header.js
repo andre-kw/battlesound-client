@@ -15,9 +15,10 @@ export default class Header extends React.Component {
   }
 
   renderUnauthenticated() {
-    return (
+    return <>
+      <Link to="/register" className="nav-link">Create account</Link>
       <Link to="/login" className="nav-link">Login</Link>
-    );
+    </>;
   }
 
   render() {

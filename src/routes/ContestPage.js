@@ -32,8 +32,10 @@ export default class ContestPage extends React.Component {
     })
       .then(res => res.json())
       .then(contest => {
+        if(contest.subs) {
+          this.context.setSelectedSub(contest.subs[0]);
+        }
         this.context.setContest(contest);
-        this.context.setSelectedSub(contest.subs[0]);
         this.context.setLoading(false);
       });
   }

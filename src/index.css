@@ -126,6 +126,10 @@ input[type="submit"]:not([disabled]) {
   border-radius: 4px;
 }
 
+section.register {
+  max-width: 25em;
+}
+
 
 
 @media only screen and (max-width: 768px) {

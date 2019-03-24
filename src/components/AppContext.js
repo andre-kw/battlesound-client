@@ -62,8 +62,7 @@ export class AppProvider extends Component {
   }
 
   setContest = (contest) => {
-    let submissions = contest.subs;
-    this.setState({contest, submissions});
+    this.setState({contest, submissions: contest.subs || []});
   }
 
   setSelectedSub = (sub) => {
