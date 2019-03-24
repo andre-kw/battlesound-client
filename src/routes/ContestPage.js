@@ -103,7 +103,7 @@ export default class ContestPage extends React.Component {
           nowPlayingSection = (
             <section className="contest-nowplaying">
               <h3>Now playing</h3>
-              <SCPlayer trackId={this.context.submissions[this.context.selectedSubIndex].id} />
+              <SCPlayer trackId={this.context.submissions[this.context.selectedSubIndex].sc_track_id} />
               <div className="track-controls">
                 <button className="btn-vote"><i className="fas fa-star"></i> <span>Vote for this track</span></button>
               </div>

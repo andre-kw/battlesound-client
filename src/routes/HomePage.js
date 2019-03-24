@@ -35,8 +35,9 @@ export default class HomePage extends React.Component {
           </div>
 
           <div className="contests">
-            {this.state.contests.length === 0 ? <p className="alert">There are no active contests. Why not create one?</p> : ''}
-            {this.state.contests.map(c => <ContestLink key={c.id} contest={c} />)}
+            {this.state.contests.length === 0 && !this.context.loading 
+              ? <p className="alert">There are no active contests. Why not create one?</p> 
+              : this.state.contests.map(c => <ContestLink key={c.id} contest={c} />)}
           </div>
         </section>
       </div>
