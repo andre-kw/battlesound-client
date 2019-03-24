@@ -4,9 +4,11 @@ import AuthService from '../services/auth';
 
 const AppContext = React.createContext({
   isUserLoggedIn: TokenService.hasAuthToken(),
+  userId: 0,
   contest: {},
   submissions: [],
   selectedSubIndex: -1,
+  error: '',
   handleLoginSubmit: () => {},
   handleLogout: () => {},
   setLoading: () => {},
@@ -20,6 +22,7 @@ export default AppContext;
 export class AppProvider extends Component {
   state = {
     loading: true,
+    userId: 0,
     isUserLoggedIn: TokenService.hasAuthToken(),
     contest: {},
     submissions: [],
@@ -28,22 +31,24 @@ export class AppProvider extends Component {
 
   handleLoginSubmit = (e, callback) => {
     e.preventDefault();
+    this.setLoading(true);
     const { username: un, password: pw } = e.target;
 
     AuthService.postLogin({
         username: un.value,
         password: pw.value,
       })
-      .then(res => {
+      .then(json => {
         un.value = '';
         pw.value = '';
 
-        TokenService.saveAuthToken(res.authToken);
-        this.setState({isUserLoggedIn: true});
+        TokenService.saveAuthToken(json.authToken);
+        this.setState({isUserLoggedIn: true, userId: json.id});
+
         callback();
       })
-      .catch(res => {
-        this.setState({error: res.error});
+      .catch(err => {
+        this.setState({error: err.error});
       })
   }
 
@@ -72,9 +77,11 @@ export class AppProvider extends Component {
     const value = {
       loading: this.state.loading,
       isUserLoggedIn: this.state.isUserLoggedIn,
+      userId: this.state.userId,
       contest: this.state.contest,
       submissions: this.state.submissions,
       selectedSubIndex: this.state.selectedSubIndex,
+      error: this.state.error,
       handleLoginSubmit: this.handleLoginSubmit,
       handleLogout: this.handleLogout,
       setLoading: this.setLoading,

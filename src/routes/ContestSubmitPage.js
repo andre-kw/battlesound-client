@@ -24,9 +24,16 @@ export default class ContestSubmitPage extends Component {
     }
   }
 
+  serializeInput = (data) => {
+    return {
+      sc_url: data.sc_url.value,
+      contest_id: this.context.contest.id,
+      user_id: this.context.userId
+    };
+  } 
+
   handleSubmit = (e) => {
     e.preventDefault();
-    
     this.context.setLoading(true);
 
     fetch(`${config.API_ENDPOINT}/submissions`, {
@@ -35,7 +42,7 @@ export default class ContestSubmitPage extends Component {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       },
-      body: JSON.stringify({contest_id: this.context.contest.id, sc_url: e.target.sc_url.value})
+      body: JSON.stringify(this.serializeInput(e.target))
     })
       .then(() => {
         this.props.redirect();
