@@ -30,7 +30,11 @@ export default class ContestPage extends React.Component {
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       }
     })
-      .then(res => res.json())
+      .then(res => {
+        return (! res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json();
+      })
       .then(contest => {
         this.context.setContest(contest);
         this.context.setLoading(false);
@@ -38,7 +42,8 @@ export default class ContestPage extends React.Component {
         if(contest.subs) {
           this.context.setSelectedSub(0);
         }
-      });
+      })
+      .catch(err => {console.log(err);});
   }
 
   voteForSub = () => {
@@ -68,7 +73,8 @@ export default class ContestPage extends React.Component {
             this.context.setError(json.error);
           }
           console.log(json);
-        });
+        })
+        .catch(err => {console.log(err);});
     } else {
       this.context.setError('You need to listen to all submissions before you can vote.');
     }

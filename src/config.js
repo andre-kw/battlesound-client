@@ -1,5 +1,4 @@
 export default {
-  API_ENDPOINT: 'http://localhost:8000/api',
-  TOKEN_KEY: 'bsclienttoken',
-  SC_CLIENT_ID: 'cQXBZEg50tuw0q10w3TGcKGBKADRLoOO',
+  API_ENDPOINT: process.env.API_ENDPOINT,
+  TOKEN_KEY: process.env.TOKEN_KEY,
 }

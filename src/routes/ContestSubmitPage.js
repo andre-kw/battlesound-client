@@ -52,7 +52,8 @@ export default class ContestSubmitPage extends Component {
         this.props.redirect();
         this.context.setLoading(false);
         this.props.grabData();
-      });
+      })
+      .catch(err => {console.log(err);});
   }
 
   render() {

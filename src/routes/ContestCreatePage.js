@@ -41,7 +41,8 @@ export default class ContestCreatePage extends Component {
       .then(json => {
         this.context.setLoading(false);
         this.redirect(json.id);
-      });
+      })
+      .catch(err => {console.log(err);});
   }
 
   redirect = (contestId) => {

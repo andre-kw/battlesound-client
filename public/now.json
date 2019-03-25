@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "name": "battlesound-client",
+  "alias": "battlesound",
+  "routes": [
+      {
+        "src": "^/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": "^/img/(.*)",
+        "dest": "/img/$1"
+      },
+      {
+        "src": ".*",
+        "dest": "/index.html"
+      }
+  ],
+  "build": {
+    "env": {
+      "API_ENDPOINT": "https://battlesound-server.herokuapp.com/api",
+      "TOKEN_KEY": "bsclienttoken"
+    }
+  }
+}
