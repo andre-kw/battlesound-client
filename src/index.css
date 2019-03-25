@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative|Nanum+Gothic');
+@import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative|Source+Sans+Pro');
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Nanum Gothic';
+  font-family: 'Source sans pro';
   background: 
     linear-gradient(#fff, #0000) no-repeat, 
     url('/img/ep_naturalwhite.png');
@@ -21,8 +21,8 @@ main {
 #s-top {
   width: 98%;
   height: 18px;
-  background-color: #c10100;
-  color: #ff2b2b;
+  background-color: #ef4645;
+  color: #ffa5a5;
   font-size: 0.8em;
   padding: 5px 1%;
   font-weight: bold;
@@ -30,6 +30,7 @@ main {
   overflow: hidden;
   text-align: justify;
   line-height: 1.5em;
+  transition: height .5s ease;
 }
 
 #s-left,
@@ -72,8 +73,8 @@ h3 {
   padding: 1em;
   font-size: 1.35em;
   color: #fff;
-  background-color: #3a9c8f;
-  border-top: 5px solid #90e0ad;
+  background-color: #3a9679;
+  border-top: 5px solid #187b3c;
   text-shadow: 0px 2px 0px #6d6d6d;
 }
 
@@ -111,7 +112,7 @@ input[type="submit"]:not([disabled]) {
 
 .breadcrumb {
   margin: 0 auto;
-  padding: 1.25em 2em;
+  padding: 1.25em;
   font-size: 0.9em;
   background-color: #232323;
   border-bottom: 5px solid #c4ecf3;
@@ -127,7 +128,7 @@ input[type="submit"]:not([disabled]) {
 
 .breadcrumb > a:link,
 .breadcrumb > a:visited {
-  color: inherit;
+  color: #adadad;
 }
 
 .breadcrumb-status { float: right }
@@ -158,6 +159,8 @@ input[type="submit"]:not([disabled]) {
 }
 
 .hidden { display: none }
+
+#s-top.hide { height: 0; padding: 0 }
 
 .form-control {
   width: 100%;
@@ -191,10 +194,21 @@ section.register {
 .text-muted { color: lightgray }
 
 .alert-danger {
-  background-color: red;
-  color: #fff;
-  border: 0;
+  margin: 1em 0;
+  color: #ff6c6c;
+  border: 3px solid #ff6c6c;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
 }
+
+.alert-danger div:first-of-type,
+.alert-danger div:last-of-type {
+  width: 4em;
+  text-align: left;
+}
+
+.icon { margin: 0 4px 0 0; }
 
 
 @media only screen and (max-width: 768px) {

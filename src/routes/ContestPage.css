@@ -27,25 +27,28 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 
 .btn-vote {
   padding: 0.5em 0.5em;
-    color: #ffe457;
-    text-shadow: 1px 2px 0px #d89b2c;
-    cursor: pointer;
-    font-size: 0.75em;
-    background: #f1f1f1;
-    border: 2px solid #d6d6d6;
-    border-radius: 3px;
-    font-weight: bold;
+  color: #fffcd9;
+  cursor: pointer;
+  font-size: 0.75em;
+  background: transparent;
+  border: 2px solid #fdff9a;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 .btn-vote span {
   margin: 0 5px;
-  text-shadow: none;
-  color: gray;
-  font-size: 0.75em;
+  font-size: 1.2em;
+  font-variant: all-small-caps;
 }
 
 .btn-vote:hover {
   color: #ffef9d;
+}
+
+.btn-vote:hover i {
+  transition: all .4s;
+  transform: rotate(360deg);
 }
 
 .btn-contest-submit {
@@ -68,9 +71,10 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   height: 8em;
   display: flex;
   justify-content: center;
-  align-items: center;
+  text-align: center;
   color: gray;
   border-radius: 5px;
+  line-height: 2em;
 }
 
 .contest-header {
@@ -90,8 +94,8 @@ h3.now-playing {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ff7a44;
-  border-top-color: #ffb270;
+  background-color: #fabc60;
+  border-top-color: #ffd493;
 }
 
 .sub {
@@ -113,5 +117,4 @@ h3.now-playing {
 
 @media only screen and (max-width: 425px) {
 
-  .btn-vote { width: 100% }
 }

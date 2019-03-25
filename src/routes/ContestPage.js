@@ -4,7 +4,7 @@ import ContestSubmitPage from './ContestSubmitPage';
 import AppContext from '../components/AppContext';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
-import {Loader, Breadcrumb} from '../components/Utils';
+import {Loader, Breadcrumb, Alert} from '../components/Utils';
 import TokenService from '../services/token';
 import config from '../config';
 import './ContestPage.css';
@@ -98,7 +98,7 @@ export default class ContestPage extends React.Component {
     }
 
     let nowPlayingSection, jsx, status;
-    let error = this.context.error ? <div className="alert alert-danger">{this.context.error}</div> : '';
+    let error = this.context.error ? <Alert type="danger">{this.context.error}</Alert> : '';
 
     switch(this.context.contest.status) {
       case 0: status = <em className="text-fail">cancelled</em>; break;
@@ -133,7 +133,7 @@ export default class ContestPage extends React.Component {
         submissionsSection = '';
         nowPlayingSection = (
           <section className="contest-nowplaying">
-            <div className="player-placeholder"><p>This contest is active but nobody has submitted anything yet.</p></div>
+            <div className="player-placeholder"><p>This contest is active but nobody has submitted anything yet.<br></br>Why not be the first?</p></div>
           </section>
         );
       // when there are submissions
@@ -144,7 +144,7 @@ export default class ContestPage extends React.Component {
           <section className="no-pad">
             <h3 className="now-playing">
               Now playing
-              <button className="btn-vote" onClick={this.voteForSub}><i className="fas fa-star"></i> <span>Vote for this track</span></button>
+              <button className="btn-vote" onClick={this.voteForSub}><i className="fas fa-star"></i> <span>Vote</span></button>
             </h3>
             <SCPlayer trackId={trackId} />
           </section>

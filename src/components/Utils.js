@@ -14,17 +14,20 @@ export function Loader(props) {
 export function Breadcrumb(props) {
   return (
     <div className="breadcrumb">
-      {!props.onHomePage ? <Link to="/home">Home</Link> : ''}
+      {!props.onHomePage ? <Link to="/home"><i className="fas fa-home icon"></i> Home</Link> : ''}
       {props.children}
     </div>
   );
 }
 
+export function Alert(props) {
+  return (
+    <div className={`alert alert-${props.type}`}><div><i className="fas fa-exclamation"></i></div> {props.children}<div></div></div>
+  );
+}
+
 export function EyeCandySpeakers() {
   return <>
-    <div id="s-top">
-      <span>{'CAUTION: Entering battle field. '.repeat(15)}</span>
-    </div>
     <div id="s-left"></div>
     <div id="s-right"></div>
   </>;

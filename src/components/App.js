@@ -16,6 +16,9 @@ class App extends Component {
 
   render() {
     return <>
+      <div id="s-top" className={this.context.contest.id ? undefined : 'hide'}>
+        <span>{'CAUTION: Entering battle field. '.repeat(15)}</span>
+      </div>
       {this.context.contest.id ? <EyeCandySpeakers /> : '' }
 
       <main>
