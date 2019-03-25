@@ -5,8 +5,13 @@
   text-align: center;
 }
 
+.submissions-list tr .sub-listened {
+  text-align: right;
+  padding: 0 2em 0 0;
+}
+
 .submissions-list tbody .sub-selected .sub-play {
-  background: #62d2bd;
+  background: #dadada;
 }
 
 .btn-play {
@@ -18,17 +23,18 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   cursor: pointer;
 }
 
-.track-controls { padding: 1em 0; text-align: right }
+.track-controls { text-align: right }
 
 .btn-vote {
   padding: 0.5em 0.5em;
-  color: #ffe457;
-  text-shadow: 1px 2px 0px #d89b2c;
-  cursor: pointer;
-  font-size: 1.25em;
-  background: #f1f1f1;
-  border: 2px solid #d6d6d6;
-  border-radius: 3px;
+    color: #ffe457;
+    text-shadow: 1px 2px 0px #d89b2c;
+    cursor: pointer;
+    font-size: 0.75em;
+    background: #f1f1f1;
+    border: 2px solid #d6d6d6;
+    border-radius: 3px;
+    font-weight: bold;
 }
 
 .btn-vote span {
@@ -80,15 +86,20 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   min-height: 5em;
 }
 
-.contest-nowplaying h3 { color: #ff530e }
+h3.now-playing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ff7a44;
+  border-top-color: #ffb270;
+}
 
 .sub {
-  height: 5em;
+  height: 3em;
 }
 
 .sub-selected {
-  background-color: #b5edf5;
-  color: #272727;
+  border: 4px solid #dadada;
 }
 
 .sub-selected .btn-play {
@@ -97,7 +108,7 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 
 
 @media only screen and (max-width: 768px) {
-  .contest-header { min-height: 23em }
+  .contest-header { min-height: 23em; padding: 2em 3em; }
 }
 
 @media only screen and (max-width: 425px) {

@@ -4,20 +4,54 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Nanum Gothic';
-  background:  linear-gradient(#fff, #0000) no-repeat, url('/img/ep_naturalwhite.png');
+  background: 
+    linear-gradient(#fff, #0000) no-repeat, 
+    url('/img/ep_naturalwhite.png');
 }
 
-#root {
+main {
   max-width: 70em;
   margin: 0 auto;
-  padding: 0 20%;
+  padding: 0 22%;
+  /*background:
+    url(/img/loudspeaker.svg) no-repeat 130% 10vh / 40%, 
+    url(/img/loudspeaker.svg) no-repeat -30% 10vh / 40%;*/
 }
+
+#s-top {
+  width: 98%;
+  height: 18px;
+  background-color: #c10100;
+  color: #ff2b2b;
+  font-size: 0.8em;
+  padding: 5px 1%;
+  font-weight: bold;
+  font-family: consolas;
+  overflow: hidden;
+  text-align: justify;
+  line-height: 1.5em;
+}
+
+#s-left,
+#s-right {
+  width: 15vw;
+  height: 22em;
+  background: url(/img/loudspeaker.svg) no-repeat 0 50% / 333%;
+  position: absolute;
+  margin: 17vh 0 0;
+  z-index: -5;
+  opacity: 0.7;
+}
+
+#s-right { right: 0 }
 
 section {
   margin: 0 auto;
-  padding: 1em 2em;
+  padding: 2.5em 2em;
   background: #f9f9f9;
 }
+
+section.no-pad { padding: 0 }
 
 h1 {
   margin: .5em auto 1em;
@@ -34,14 +68,26 @@ h2 {
 }
 
 h3 {
-  margin: 1em 0 1.5em;
-  color: gray;
-  font-size: 1.25em;
+  margin: 0;
+  padding: 1em;
+  font-size: 1.35em;
+  color: #fff;
+  background-color: #3a9c8f;
+  border-top: 5px solid #90e0ad;
+  text-shadow: 0px 2px 0px #6d6d6d;
+}
+
+h3.fancy {
+  padding: 1.05em 1em 0 1em;
+  font-size: 2em;
+  font-weight: 600;
+  font-family: 'cinzel decorative';
+  text-shadow: none;
+  line-height: 0.6em;
 }
 
 table {
   width: 100%;
-  margin: 0 0 1.5em;
 }
 
 table, th, td {
@@ -85,10 +131,9 @@ input[type="submit"]:not([disabled]) {
 }
 
 .breadcrumb-status { float: right }
-.breadcrumb-status em { color: lightgreen }
 
 .alert {
-  margin: 1em auto;
+  margin: 1em;
   padding: 1em;
   text-align: center;
   color: gray;
@@ -140,7 +185,35 @@ section.register {
 
 .btn.btn-create { color: #31a6c1; }
 
+.text-success { color: rgb(0, 197, 0) }
+.text-fail { color: lightcoral }
+.text-warning { color: gold }
+.text-muted { color: lightgray }
+
+.alert-danger {
+  background-color: red;
+  color: #fff;
+  border: 0;
+}
+
 
 @media only screen and (max-width: 768px) {
-  #root { padding: 0 5% }
+  main {
+    padding: 0 5%;
+  }
+
+  #s-left { background-position-x: 105% }
+}
+
+@media only screen and (min-width: 1024px) {
+  #s-left,
+  #s-right {
+    width: 10vw;
+    height: 100vh;
+    background: url(/img/loudspeaker.svg) no-repeat 0 25% / 333%;
+    position: absolute;
+    margin: 5em 0 0 0;
+  }
+
+  #s-left { background-position-x: 105% }
 }

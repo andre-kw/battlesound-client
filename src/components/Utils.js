@@ -20,6 +20,16 @@ export function Breadcrumb(props) {
   );
 }
 
+export function EyeCandySpeakers() {
+  return <>
+    <div id="s-top">
+      <span>{'CAUTION: Entering battle field. '.repeat(15)}</span>
+    </div>
+    <div id="s-left"></div>
+    <div id="s-right"></div>
+  </>;
+}
+
 export function PrivateRoute({ component, ...props }) {
   const Component = component
   return (

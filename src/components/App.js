@@ -6,14 +6,20 @@ import RegisterPage from '../routes/RegisterPage';
 import HomePage from '../routes/HomePage';
 import ContestPage from '../routes/ContestPage';
 import ContestCreatePage from '../routes/ContestCreatePage';
+import { EyeCandySpeakers } from '../components/Utils';
 import Header from './Header';
+import AppContext from './AppContext';
 // import { PrivateRoute, PublicOnlyRoute } from '../components/Utils';
 
 class App extends Component {
+  static contextType = AppContext;
+
   render() {
     return <>
-      <Header />
+      {this.context.contest.id ? <EyeCandySpeakers /> : '' }
+
       <main>
+        <Header />
         <Switch>
           <Route exact path={'/login'} component={LoginPage} />
           <Route exact path={'/register'} component={RegisterPage} />

@@ -1,32 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ContestSubmitPage from './ContestSubmitPage';
+import AppContext from '../components/AppContext';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
 import {Loader, Breadcrumb} from '../components/Utils';
 import TokenService from '../services/token';
-import AppContext from '../components/AppContext';
 import config from '../config';
 import './ContestPage.css';
-import ContestSubmitPage from './ContestSubmitPage';
 
 export default class ContestPage extends React.Component {
   static contextType = AppContext;
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      nowPlaying: null,
-    };
-  }
 
   componentDidMount() {
     this.grabData();
   }
 
+  componentWillUnmount() {
+    this.context.setContest({});
+    this.context.setSelectedSub(0);
+  }
+
   grabData = () => {
     this.context.setLoading(true);
-
     const id = parseInt(this.props.match.params.id) || 0;
 
     fetch(`${config.API_ENDPOINT}/contests/${id}`, {
@@ -36,12 +32,46 @@ export default class ContestPage extends React.Component {
     })
       .then(res => res.json())
       .then(contest => {
-        if(contest.subs) {
-          this.context.setSelectedSub(contest.subs[0]);
-        }
         this.context.setContest(contest);
         this.context.setLoading(false);
+
+        if(contest.subs) {
+          this.context.setSelectedSub(0);
+        }
       });
+  }
+
+  voteForSub = () => {
+    let listenedToAll = true;
+
+    this.context.submissions.forEach(s => {
+      if(! s.listened) {
+        listenedToAll = false;
+      }
+    });
+
+    if(listenedToAll) {
+      fetch(`${config.API_ENDPOINT}/votes/${this.context.contest.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${TokenService.getAuthToken()}`
+        },
+        body: JSON.stringify({
+          user_id: this.context.user.id,
+          contest_id: this.context.contest.id
+        })
+      })
+        .then(res => res.json())
+        .then(json => {
+          if(json.error) {
+            this.context.setError(json.error);
+          }
+          console.log(json);
+        });
+    } else {
+      this.context.setError('You need to listen to all submissions before you can vote.');
+    }
   }
 
   redirect = () => {
@@ -67,18 +97,27 @@ export default class ContestPage extends React.Component {
       }
     }
 
-    let nowPlayingSection, jsx;
+    let nowPlayingSection, jsx, status;
+    let error = this.context.error ? <div className="alert alert-danger">{this.context.error}</div> : '';
 
-    let submissionsSection = (
+    switch(this.context.contest.status) {
+      case 0: status = <em className="text-fail">cancelled</em>; break;
+      case 1: status = <em className="text-success">ongoing</em>; break;
+      case 2: status = <em className="text-warning">ended</em>; break;
+      default: status = ''; break;
+    }
+
+    let submissionsSection = <>
+      <h3>Submissions</h3>
+
       <section className="contest-submissions">
-        <h3>Submissions</h3>
-
         <table className="submissions-list">
           <thead>
             <tr>
               <th></th>
               <th>Track</th>
               <th>Artist</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -86,7 +125,7 @@ export default class ContestPage extends React.Component {
           </tbody>
         </table>
       </section>
-    );
+    </>;
 
     if(! this.context.loading) {
       // when there's no submissions
@@ -97,21 +136,21 @@ export default class ContestPage extends React.Component {
             <div className="player-placeholder"><p>This contest is active but nobody has submitted anything yet.</p></div>
           </section>
         );
+      // when there are submissions
+      } else if(this.context.submissions.length > this.context.selectedSubIndex - 1) {
+        let trackId = this.context.submissions[this.context.selectedSubIndex].sc_track_id;
+
+        nowPlayingSection = <>
+          <section className="no-pad">
+            <h3 className="now-playing">
+              Now playing
+              <button className="btn-vote" onClick={this.voteForSub}><i className="fas fa-star"></i> <span>Vote for this track</span></button>
+            </h3>
+            <SCPlayer trackId={trackId} />
+          </section>
+        </>;
       } else {
-        // when there are submissions
-        if(this.context.selectedSubIndex > -1) {
-          nowPlayingSection = (
-            <section className="contest-nowplaying">
-              <h3>Now playing</h3>
-              <SCPlayer trackId={this.context.submissions[this.context.selectedSubIndex].sc_track_id} />
-              <div className="track-controls">
-                <button className="btn-vote"><i className="fas fa-star"></i> <span>Vote for this track</span></button>
-              </div>
-            </section>
-          );
-        } else {
-          // nowPlayingSection = <div className="player-placeholder"><p>Please select a track.</p></div>;
-        }
+        // nowPlayingSection = <div className="player-placeholder"><p>Please select a track.</p></div>;
       }
     }
 
@@ -119,13 +158,15 @@ export default class ContestPage extends React.Component {
       <section className="contest-header">
         <h1><p>⚔️</p>{this.context.contest.title}</h1>
         <Link to={`/contest/${this.context.contest.id}#submit`} className="btn-contest-submit">Enter your submission</Link>
-        <p>12 slots remaining</p>
+        <p>{this.context.contest.max_submissions - this.context.submissions.length} slots remaining</p>
       </section>
       
+      {error}
+
       <div className="page-container">
         <Breadcrumb>
           <span>Contest page</span>
-          <span className="breadcrumb-status">Status: <em>ongoing</em></span>
+          <span className="breadcrumb-status">Status: {status}</span>
         </Breadcrumb>
 
         {nowPlayingSection}

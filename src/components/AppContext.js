@@ -7,14 +7,15 @@ const AppContext = React.createContext({
   user: JSON.parse(window.localStorage.user || '{}'),
   contest: {},
   submissions: [],
-  selectedSubIndex: -1,
-  error: '',
+  selectedSubIndex: 0,
+  error: null,
   handleLogin: () => {},
   handleLoginSubmit: () => {},
   handleLogout: () => {},
   setLoading: () => {},
   setContest: () => {},
   setSelectedSub: () => {},
+  setError: () => {},
 });
 
 export default AppContext;
@@ -27,7 +28,8 @@ export class AppProvider extends Component {
     isUserLoggedIn: TokenService.hasAuthToken(),
     contest: {},
     submissions: [],
-    selectedSubIndex: -1,
+    selectedSubIndex: 0,
+    error: null,
   }
 
   handleLogin = (credentials, callback = () => {}) => {
@@ -67,11 +69,32 @@ export class AppProvider extends Component {
   }
 
   setContest = (contest) => {
-    this.setState({contest, submissions: contest.subs || []});
+    let submissions;
+
+    if(contest.subs) {
+      submissions = contest.subs.map(s => {
+        s.listened = false;
+        return s;
+      });
+    } else {
+      submissions = [];
+    }
+
+    this.setState({contest, submissions});
   }
 
   setSelectedSub = (index) => {
-    this.setState({selectedSubIndex: index});
+    const submissions = this.state.submissions;
+
+    if(submissions[index]) {
+      submissions[index].listened = true;
+    }
+
+    this.setState({selectedSubIndex: index, submissions, error: null});
+  }
+
+  setError = (error) => {
+    this.setState({error});
   }
 
   render() {
@@ -89,6 +112,7 @@ export class AppProvider extends Component {
       setLoading: this.setLoading,
       setContest: this.setContest,
       setSelectedSub: this.setSelectedSub,
+      setError: this.setError,
     }
 
     return (
