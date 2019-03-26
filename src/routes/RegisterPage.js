@@ -58,7 +58,7 @@ export default class RegisterPage extends React.Component {
       <section className="register">
         <div className="login-form">
           <form onSubmit={(e) => this.handleRegisterSubmit(e)}>
-            <input type="text" name="username" placeholder="Username" className="form-control" required></input>
+            <input type="text" name="username" placeholder="Username" className="form-control" required autoComplete="off"></input>
             <input type="password" name="password" placeholder="Password" className="form-control" required></input>
             <input type="password" name="password_confirm" placeholder="Confirm password" className="form-control" required></input>
             <input type="submit" value="Register" className="form-control"></input>

@@ -33,6 +33,10 @@ main {
   transition: height .5s ease;
 }
 
+#s-left {
+  background-position-x: 105%;
+}
+
 #s-left,
 #s-right {
   width: 15vw;

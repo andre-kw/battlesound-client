@@ -16,10 +16,8 @@
         "dest": "/index.html"
       }
   ],
-  "build": {
-    "env": {
-      "API_ENDPOINT": "https://battlesound-server.herokuapp.com/api",
-      "TOKEN_KEY": "bsclienttoken"
-    }
+  "env": {
+    "REACT_APP_API_ENDPOINT": "https://battlesound-server.herokuapp.com/api",
+    "REACT_APP_TOKEN_KEY": "bsclienttoken"
   }
 }
