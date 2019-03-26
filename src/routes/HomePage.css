@@ -8,9 +8,26 @@
   display: flex;
   padding: 1em 0 2em;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .header-w-link h2 {
   margin: 0;
-  flex: 8;
+  flex: 8 1;
+  color: #4a4a4a;
+  font-size: 2.4em;
+  font-family: cinzel decorative;
+}
+
+.home-contest-list {
+  background: linear-gradient(#fff, rgba(255, 255, 255, 0)), #f7f7f7 url(/img/coat.png) no-repeat -7em -3em;
+}
+
+
+@media only screen and (max-width: 425px) {
+  .header-w-link h2 {
+    font-size: 1.6em;
+  }
+
+  .btn-create { width: 100%; margin: 1em 0 0 0; }
 }

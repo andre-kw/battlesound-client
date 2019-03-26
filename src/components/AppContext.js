@@ -5,6 +5,7 @@ import AuthService from '../services/auth';
 const AppContext = React.createContext({
   isUserLoggedIn: TokenService.hasAuthToken(),
   user: JSON.parse(window.localStorage.user || '{}'),
+  contests: [],
   contest: {},
   submissions: [],
   selectedSubIndex: 0,
@@ -26,6 +27,7 @@ export class AppProvider extends Component {
     loading: true,
     user: JSON.parse(window.localStorage.user || '{}'),
     isUserLoggedIn: TokenService.hasAuthToken(),
+    contests: [],
     contest: {},
     submissions: [],
     selectedSubIndex: 0,
@@ -83,6 +85,10 @@ export class AppProvider extends Component {
     this.setState({contest, submissions});
   }
 
+  setContests = (contests) => {
+    this.setState({contests});
+  }
+
   setSelectedSub = (index) => {
     const submissions = this.state.submissions;
 
@@ -102,6 +108,7 @@ export class AppProvider extends Component {
       loading: this.state.loading,
       isUserLoggedIn: this.state.isUserLoggedIn,
       user: this.state.user,
+      contests: this.state.contests,
       contest: this.state.contest,
       submissions: this.state.submissions,
       selectedSubIndex: this.state.selectedSubIndex,
@@ -111,6 +118,7 @@ export class AppProvider extends Component {
       handleLogout: this.handleLogout,
       setLoading: this.setLoading,
       setContest: this.setContest,
+      setContests: this.setContests,
       setSelectedSub: this.setSelectedSub,
       setError: this.setError,
     }

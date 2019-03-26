@@ -1,21 +1,32 @@
 .contest-ongoing {
-  margin: 0 0.75em 1.5em;
+  margin: 0 0 1.5em;
   border: 1px solid #d6d6d6;
-  background: #fdfdfd;
   border-radius: 5px;
   text-decoration: none;
-  flex-basis: auto;
+  flex-basis: 20em;
   flex-grow: 1;
-}
-
-.contest-ongoing:hover .stats {
-  background: rgb(66, 145, 150);
+  font-variant: all-small-caps;
+  font-size: 1.5em;
 }
 
 .contest-ongoing h3 {
-  padding: 0 1em;
-  font-size: 1em;
-  color: #505050;
+  background: #424242;
+  color: #e9e4e6;
+  border: 0;
+  text-shadow: none;
+  border-radius: 5px 5px 0 0;
+}
+
+.contest-ongoing h3 i {
+  margin: 0 10px 0 0;
+}
+
+.contest-ongoing:hover .stats {
+  background: #007880;
+}
+
+.contest-ongoing:active h3 {
+  background-color: #2d2d2d;
 }
 
 .stats {
@@ -24,6 +35,15 @@
   font-weight: bold;
   text-align: right;
   color: #fff;
-  background: #73bff5;
+  background: #313131;
   border-radius: 0 0 5px 5px;
+  transition: all .2s;
+}
+
+
+
+@media only screen and (max-width: 425px) {
+  .contest-ongoing h3 {
+    font-size: 0.9em;
+  }
 }
