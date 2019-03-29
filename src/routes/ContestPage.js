@@ -8,6 +8,7 @@ import {Loader, Breadcrumb, Alert} from '../components/Utils';
 import TokenService from '../services/token';
 import config from '../config';
 import './ContestPage.css';
+import ContestWinnersPage from './ContestWinnersPage';
 
 export default class ContestPage extends React.Component {
   static contextType = AppContext;
@@ -64,7 +65,8 @@ export default class ContestPage extends React.Component {
         },
         body: JSON.stringify({
           user_id: this.context.user.id,
-          contest_id: this.context.contest.id
+          contest_id: this.context.contest.id,
+          submission_id: this.context.submissions[this.context.selectedSubIndex].id
         })
       })
         .then(res => res.json())
@@ -85,34 +87,8 @@ export default class ContestPage extends React.Component {
   }
 
   render() {
-    /* FOR THE FUTURE
-      if(this.state.contest.completed) {
-        return <ContestCompletedPage />
-      }
-    */
-
-    if(this.context.loading) {
-      return <Loader />;
-    }
-
-    if(this.props.location.hash === '#submit') {
-      if(TokenService.hasAuthToken()) {
-        return <ContestSubmitPage contestId={this.props.match.params.id} redirect={this.redirect} grabData={this.grabData} />;
-      } else {
-        this.props.history.push('/login');
-      }
-    }
-
-    let nowPlayingSection, jsx, status;
+    let nowPlayingSection, jsx;
     let error = this.context.error ? <Alert type="danger">{this.context.error}</Alert> : '';
-
-    switch(this.context.contest.status) {
-      case 0: status = <em className="text-fail">cancelled</em>; break;
-      case 1: status = <em className="text-success">ongoing</em>; break;
-      case 2: status = <em className="text-warning">ended</em>; break;
-      default: status = ''; break;
-    }
-
     let submissionsSection = <>
       <h3>Submissions</h3>
 
@@ -133,10 +109,34 @@ export default class ContestPage extends React.Component {
       </section>
     </>;
 
+    /* FOR THE FUTURE
+      if(this.state.contest.completed) {
+        return <ContestCompletedPage />
+      }
+    */
+
+    if(this.context.loading) {
+      return <Loader />;
+    }
+
+    if(this.props.location.hash === '#submit') {
+      if(TokenService.hasAuthToken()) {
+        return <ContestSubmitPage contestId={this.props.match.params.id} redirect={this.redirect} grabData={this.grabData} />;
+      } else {
+        this.props.history.push('/login');
+      }
+    }
+
+    if(this.context.contest.status === 3) {
+    // if(true) {
+      return <ContestWinnersPage status={this.context.contest.status} />;
+    }
+
     if(! this.context.loading) {
       // when there's no submissions
       if(this.context.submissions.length === 0) {
         submissionsSection = '';
+
         nowPlayingSection = (
           <section className="contest-nowplaying">
             <div className="player-placeholder"><p>This contest is active but nobody has submitted anything yet.<br></br>Why not be the first?</p></div>
@@ -170,9 +170,8 @@ export default class ContestPage extends React.Component {
       {error}
 
       <div className="page-container">
-        <Breadcrumb>
+        <Breadcrumb status={this.context.contest.status}>
           <span>Contest page</span>
-          <span className="breadcrumb-status">Status: {status}</span>
         </Breadcrumb>
 
         {nowPlayingSection}

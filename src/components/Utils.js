@@ -12,10 +12,20 @@ export function Loader(props) {
 }
 
 export function Breadcrumb(props) {
+  let status;
+
+  switch(props.status) {
+    case 0: status = <em className="text-fail">cancelled</em>; break;
+    case 1: status = <em className="text-success">ongoing</em>; break;
+    case 3: status = <em className="text-warning">ended</em>; break;
+    default: status = <em className="text-muted">n/a</em>; break;
+  }
+  
   return (
     <div className="breadcrumb">
       {!props.onHomePage ? <Link to="/home"><i className="fas fa-home icon"></i> Home</Link> : ''}
       {props.children}
+      {!props.hideStatus ? <span className="breadcrumb-status">Status: {status}</span> : ''}
     </div>
   );
 }

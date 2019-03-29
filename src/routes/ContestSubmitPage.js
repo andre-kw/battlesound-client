@@ -64,7 +64,7 @@ export default class ContestSubmitPage extends Component {
       </section>
       
       <div className="page-container">
-        <Breadcrumb>
+        <Breadcrumb hideStatus>
           <Link to={`/contest/${this.props.contestId}`}>Contest page</Link>
           <span>Submit track</span>
         </Breadcrumb>

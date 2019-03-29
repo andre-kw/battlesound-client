@@ -34,7 +34,10 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   border: 2px solid #fdff9a;
   border-radius: 3px;
   font-weight: bold;
+  transition: all .5s;
 }
+
+.btn-vote i { color: inherit; }
 
 .btn-vote span {
   margin: 0 5px;
@@ -43,11 +46,12 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
 }
 
 .btn-vote:hover {
-  color: #ffef9d;
+  color: #98800f;
+  border-color: #98800f;
 }
 
 .btn-vote:hover i {
-  transition: all .4s;
+  transition: inherit;
   transform: rotate(360deg);
 }
 
@@ -116,5 +120,9 @@ h3.now-playing {
 }
 
 @media only screen and (max-width: 425px) {
-
+  .contest-submissions { font-size: 0.9em; }
+  
+  .submissions-list tr .sub-play {
+    padding: .2em;
+  }
 }

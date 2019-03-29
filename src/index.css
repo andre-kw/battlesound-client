@@ -107,7 +107,7 @@ th {
   text-align: left;
 }
 
-input[type="submit"] { cursor: pointer }
+input[type="submit"] { cursor: pointer; height: 4em }
 
 input[type="submit"]:not([disabled]) {
   background: #5eb3ff;
@@ -172,7 +172,7 @@ input[type="submit"]:not([disabled]) {
   box-sizing: border-box;
   font-family: inherit;
   padding: 0.7em;
-  margin: 1em 0;
+  margin: 2em 0 0 0;
   border: 1px solid gray;
   border-radius: 4px;
 }

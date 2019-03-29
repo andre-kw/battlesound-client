@@ -11,8 +11,10 @@ export default class ContestLink extends React.Component {
     if(countVotes > 15) {
       iconClass = 'fa-thermometer-full text-danger';
     } else if(countVotes > 10) {
-      iconClass = 'fa-thermometer-half text-warning';
+      iconClass = 'fa-thermometer-three-quarters text-warning';
     } else if(countVotes > 5) {
+      iconClass = 'fa-thermometer-half text-warning';
+    } else if(countVotes > 0) {
       iconClass = 'fa-thermometer-quarter text-warning';
     } else {
       iconClass = 'fa-thermometer-empty text-muted';
