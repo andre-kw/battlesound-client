@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "manifest_version": 2,
+  "version": "0.1",
+  "short_name": "Battlesound",
+  "name": "Battlesound",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +10,7 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": ".",
+  "start_url": "https://battlesound.now.sh",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff"
