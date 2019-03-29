@@ -37,10 +37,11 @@ export class AppProvider extends Component {
   handleLogin = (credentials, callback = () => {}) => {
     AuthService.postLogin(credentials)
       .then(json => {
+        let user = {id: json.id}
         TokenService.saveAuthToken(json.authToken);
-        window.localStorage.user = JSON.stringify({id: json.id});
-        this.setState({isUserLoggedIn: true});
+        window.localStorage.user = JSON.stringify(user);
 
+        this.setState({isUserLoggedIn: true, user});
         callback();
       })
       .catch(err => {

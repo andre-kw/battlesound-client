@@ -61,7 +61,7 @@ export default class ContestCreatePage extends Component {
       </section>
       
       <div className="page-container">
-        <Breadcrumb>
+        <Breadcrumb hideStatus>
           <span>Create contest</span>
         </Breadcrumb>
 

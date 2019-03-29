@@ -34,14 +34,14 @@ main {
 }
 
 #s-left {
-  background-position-x: 105%;
+  background-position-x: 105% !important;
 }
 
 #s-left,
 #s-right {
   width: 15vw;
   height: 22em;
-  background: url(/img/loudspeaker.svg) no-repeat 0 50% / 333%;
+  background: url(/img/loudspeaker.svg) no-repeat 0 50% / 270%;
   position: absolute;
   margin: 17vh 0 0;
   z-index: -5;
@@ -107,11 +107,13 @@ th {
   text-align: left;
 }
 
-input[type="submit"] { cursor: pointer; height: 4em }
+input[type="submit"] { cursor: pointer; height: 3em }
 
 input[type="submit"]:not([disabled]) {
   background: #5eb3ff;
   color: #fff;
+  font-size: 1.25em;
+  border: 1px solid cornflowerblue;
 }
 
 .breadcrumb {
@@ -177,8 +179,10 @@ input[type="submit"]:not([disabled]) {
   border-radius: 4px;
 }
 
-section.register {
+section.register,
+section.login {
   max-width: 25em;
+  background-color: transparent;
 }
 
 .btn {
@@ -221,8 +225,6 @@ section.register {
   main {
     padding: 0 5%;
   }
-
-  #s-left { background-position-x: 105% }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -234,6 +236,4 @@ section.register {
     position: absolute;
     margin: 5em 0 0 0;
   }
-
-  #s-left { background-position-x: 105% }
 }
