@@ -201,7 +201,7 @@ section.login {
 .text-fail { color: lightcoral }
 .text-danger { color: red }
 .text-warning { color: gold }
-.text-muted { color: lightgray }
+.text-muted { color: gray }
 
 .alert-danger {
   margin: 1em 0;

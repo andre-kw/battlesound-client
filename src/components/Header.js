@@ -7,7 +7,10 @@ export default class Header extends React.Component {
   static contextType = AppContext;
 
   renderAuthenticated() {
+    const welcomeStr = 'Hi, ' + JSON.parse(window.localStorage.user).username + '!' || '';
+
     return <>
+      <span className="text-muted">{welcomeStr}</span>
       <Link to="/" className="nav-link"><i className="fas fa-chess-king"></i> HQ</Link>
       <Link to="/" className="nav-link nav-logout" onClick={this.context.handleLogout}><i className="fas fa-sign-out-alt"></i> Logout</Link>
     </>;
@@ -20,7 +23,7 @@ export default class Header extends React.Component {
     </>;
   }
 
-  render() {
+  render() {    
     return (
       <header>
         <nav>

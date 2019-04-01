@@ -22,10 +22,13 @@ export default class ContestLink extends React.Component {
     
     return (
       <Link to={'/contest/' + this.props.contest.id} className="contest-ongoing">
-        <h3><i className={`fas ${iconClass}`}></i> {this.props.contest.title}</h3>
+        <h3>
+          <p><i className={`fas ${iconClass}`}></i> {this.props.contest.title}</p>
+          <p className="contest-status">{this.props.contest.user_vote ? <i className="fas fa-vote-yea"></i> : ''}</p>
+        </h3>
 
         <div className="stats">
-          <span className="stats-votes">{countSubs} submissions · {countVotes} votes</span>
+          <span className="stats-count">{countSubs} submissions · {countVotes} votes</span>
         </div>
       </Link>
     );

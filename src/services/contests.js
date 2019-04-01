@@ -2,8 +2,10 @@ import config from '../config';
 import TokenService from '../services/token';
 
 const ContestsService = {
-  getContests() {
-    return fetch(`${config.API_ENDPOINT}/contests`, {
+  getContests(userId) {
+    const query = userId ? `?user=${userId}` : '';
+    
+    return fetch(`${config.API_ENDPOINT}/contests${query}`, {
       headers: {
         'Authorization': `Bearer ${TokenService.getAuthToken()}`
       }

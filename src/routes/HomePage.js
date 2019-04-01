@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
   static contextType = AppContext;
 
   componentDidMount() {
-    ContestsService.getContests()
+    ContestsService.getContests(this.context.user.id)
       .then(contests => {
         this.context.setLoading(false);
         this.context.setContests(contests);

@@ -45,7 +45,11 @@ export default class ContestPage extends React.Component {
         }
       })
       .catch(err => {console.log(err);});
-  }
+
+      /*let index = this.context.contests.findIndex(c => c.id === id);
+      this.context.setContest(this.context.contests[index]);
+      this.context.setLoading(false);*/
+    }
 
   voteForSub = () => {
     let listenedToAll = true;
@@ -89,6 +93,7 @@ export default class ContestPage extends React.Component {
   render() {
     let nowPlayingSection, jsx;
     let error = this.context.error ? <Alert type="danger">{this.context.error}</Alert> : '';
+    let votedJsx = <div className="contest-voted"><p>You have voted in this contest.</p></div>
     let submissionsSection = <>
       <h3>Submissions</h3>
 
@@ -128,7 +133,6 @@ export default class ContestPage extends React.Component {
     }
 
     if(this.context.contest.status === 3) {
-    // if(true) {
       return <ContestWinnersPage status={this.context.contest.status} />;
     }
 
@@ -161,6 +165,7 @@ export default class ContestPage extends React.Component {
     }
 
     jsx = <>
+      {this.context.contest.user_vote}
       <section className="contest-header">
         <h1><p>⚔️</p>{this.context.contest.title}</h1>
         <Link to={`/contest/${this.context.contest.id}#submit`} className="btn-contest-submit">Enter your submission</Link>

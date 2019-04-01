@@ -6,7 +6,7 @@ export default class LandingPage extends React.Component {
   render() {
     return (
       <section className="landing">
-        <div id="s-bg"></div>
+        {/* <div id="s-bg"></div> */}
         
         <h1>Welcome to Battlesound</h1>
         <p>The internet's no-fly zone for beats.</p>
