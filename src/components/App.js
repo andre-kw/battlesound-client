@@ -6,7 +6,7 @@ import RegisterPage from '../routes/RegisterPage';
 import HomePage from '../routes/HomePage';
 import ContestPage from '../routes/ContestPage';
 import ContestCreatePage from '../routes/ContestCreatePage';
-import { EyeCandySpeakers } from '../components/Utils';
+import { EyeCandySpeakers, EyeCandyBanner } from '../components/Utils';
 import Header from './Header';
 import AppContext from './AppContext';
 // import { PrivateRoute, PublicOnlyRoute } from '../components/Utils';
@@ -16,13 +16,12 @@ class App extends Component {
 
   render() {
     return <>
-      <div id="s-top" className={this.context.contest.id ? undefined : 'hide'}>
-        <span>{'CAUTION: Entering battle field. '.repeat(15)}</span>
-      </div>
+      <EyeCandyBanner contestId={this.context.contest.id} />
       {this.context.contest.id ? <EyeCandySpeakers /> : '' }
 
+      <Header />
+
       <main>
-        <Header />
         <Switch>
           <Route exact path={'/login'} component={LoginPage} />
           <Route exact path={'/register'} component={RegisterPage} />

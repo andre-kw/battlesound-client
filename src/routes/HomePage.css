@@ -1,17 +1,15 @@
-.contests {
+.section-contest-cards {
+  padding: 1em 3em 0;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.header-w-link {
-  display: flex;
-  padding: 1em 0 2em;
-  align-items: center;
-  flex-wrap: wrap;
+.header-home {
+  border-top: 0;
 }
 
-.header-w-link h2 {
+.header-home h2 {
   margin: 0;
   flex: 8 1;
   color: #4a4a4a;
@@ -19,7 +17,7 @@
   font-family: cinzel decorative;
 }
 
-.home-contest-list {
+.contest-list {
   background: linear-gradient(#fff, rgba(255, 255, 255, 0)), #f7f7f7 url(/img/coat.png) no-repeat -7em -3em;
 }
 

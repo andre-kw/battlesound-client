@@ -43,6 +43,14 @@ export function EyeCandySpeakers() {
   </>;
 }
 
+export function EyeCandyBanner(props) {
+  return (
+    <div id="s-top" className={props.contestId ? undefined : 'hide'}>
+      <span>{'CAUTION: Entering battle field. '.repeat(15)}</span>
+    </div>
+  );
+}
+
 export function PrivateRoute({ component, ...props }) {
   const Component = component
   return (
