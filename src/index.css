@@ -52,7 +52,6 @@ main {
 
 section {
   margin: 0 auto;
-  padding: 2.5em 2em;
   background: #f9f9f9;
 }
 
@@ -74,11 +73,8 @@ h2 {
 
 h3 {
   margin: 0;
-  padding: 1em;
   font-size: 1.35em;
   color: #fff;
-  background-color: #3a9679;
-  border-top: 5px solid #187b3c;
   text-shadow: 0px 2px 0px #6d6d6d;
 }
 
@@ -114,6 +110,14 @@ input[type="submit"]:not([disabled]) {
   color: #fff;
   font-size: 1.25em;
   border: 1px solid cornflowerblue;
+}
+
+section > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25em 1.5em;
+  border-top: 7px solid;
 }
 
 .breadcrumb {
@@ -219,6 +223,19 @@ section.login {
 }
 
 .icon { margin: 0 4px 0 0; }
+
+
+
+.section-content {
+  padding: 2.5em 2em;
+}
+
+.contest-submissions {
+  margin: -1.5em 0 0;
+  position: relative;
+  z-index: 10;
+}
+
 
 
 @media only screen and (max-width: 768px) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../components/AppContext';
-import ContestLink from '../components/ContestLink';
+import ContestLink from '../components/ContestCard';
 import { Loader } from '../components/Utils';
 import './HomePage.css';
 

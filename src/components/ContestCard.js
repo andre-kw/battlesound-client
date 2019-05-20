@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './ContestLink.css';
+import config from '../config';
+import './ContestCard.css';
 
 export default class ContestLink extends React.Component {
   render() {
@@ -8,11 +9,11 @@ export default class ContestLink extends React.Component {
     let countSubs = parseInt(this.props.contest.count_subs),
         countVotes = parseInt(this.props.contest.count_votes);
 
-    if(countVotes > 15) {
+    if(countVotes > config.VOTES_THRESHOLD * 3) {
       iconClass = 'fa-thermometer-full text-danger';
-    } else if(countVotes > 10) {
+    } else if(countVotes > config.VOTES_THRESHOLD * 2) {
       iconClass = 'fa-thermometer-three-quarters text-warning';
-    } else if(countVotes > 5) {
+    } else if(countVotes > config.VOTES_THRESHOLD) {
       iconClass = 'fa-thermometer-half text-warning';
     } else if(countVotes > 0) {
       iconClass = 'fa-thermometer-quarter text-warning';

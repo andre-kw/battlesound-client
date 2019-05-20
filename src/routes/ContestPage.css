@@ -29,7 +29,7 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   padding: 0.5em 0.5em;
   color: #fffcd9;
   cursor: pointer;
-  font-size: 0.65em;
+  font-size: 1em;
   background: transparent;
   border: 2px solid #fdff9a;
   border-radius: 3px;
@@ -94,14 +94,6 @@ tr:not(.sub-selected) .sub-play .btn-play:hover {
   min-height: 5em;
 }
 
-h3.now-playing {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #f9b145;
-  border-top-color: #ffd493;
-}
-
 .sub {
   height: 3em;
 }
@@ -112,6 +104,18 @@ h3.now-playing {
 
 .sub-selected .btn-play {
   color: #fff;
+}
+
+
+
+.header-now-playing {
+  background-color: #006d94;
+  border-top-color: #065673;
+}
+
+.header-submissions {
+  background-color: #3e7769;
+  border-top-color: #065673;
 }
 
 

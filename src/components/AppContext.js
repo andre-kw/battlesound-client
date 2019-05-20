@@ -18,7 +18,8 @@ const AppContext = React.createContext({
   setContest: () => {},
   setSelectedSub: () => {},
   setError: () => {},
-  getContests: () => {}
+  getContests: () => {},
+  getContestById: () => {},
 });
 
 export default AppContext;
@@ -107,11 +108,24 @@ export class AppProvider extends Component {
   }
 
   getContests = () => {
-    return ContestsService.getContests(this.context.user.id)
+    return ContestsService.getContests(this.state.user.id)
       .then(contests => {
         this.setLoading(false);
         this.setContests(contests);
       });
+  }
+
+  getContestById = (id) => {
+    this.setLoading(true);
+
+    ContestsService.getContestById(id)
+      .then(contest => {
+        this.setContest(contest);
+        this.setLoading(false);
+
+        if(contest.subs) this.setSelectedSub(0);
+      })
+      .catch(err => {console.log('getContestById Error:', err);});
   }
 
   render() {
@@ -133,6 +147,7 @@ export class AppProvider extends Component {
       setSelectedSub: this.setSelectedSub,
       setError: this.setError,
       getContests: this.getContests,
+      getContestById: this.getContestById,
     }
 
     return (
