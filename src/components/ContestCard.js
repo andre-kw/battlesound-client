@@ -47,9 +47,9 @@ class ContestCard extends React.Component {
           <div className="flex-break"></div>
 
           <div className="contest-card-stats">
-            <p className="rack-display" data-label="submissions">500</p>
-            <p className="rack-display" data-label="votes">0</p>
-            <button onClick={() => this.redirect(this.props.contest.id)} className="rack-btn"><p>Visit</p></button>
+            <p className="rack-display" data-label="submissions">{countSubs}</p>
+            <p className="rack-display" data-label="votes">{countVotes}</p>
+            <button onClick={() => this.redirect(this.props.contest.id)} className="rack-btn"><p><i className="fas fa-play"></i></p></button>
           </div>
         </div>
       </article>

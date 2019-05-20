@@ -123,6 +123,7 @@ section > header {
   justify-content: space-between;
   padding: 1.25em 1.5em;
   border-top: 7px solid;
+  flex-wrap: wrap;
 }
 
 .breadcrumb {
@@ -204,7 +205,11 @@ section.login {
 
 .btn i { margin: 0 6px 0 0 }
 
-.btn.btn-create { color: #31a6c1; }
+.btn.btn-create {
+  margin: 1em auto 0;
+  background-color: #31a6c1;
+  color: #fff;
+}
 
 .text-success { color: rgb(0, 197, 0) }
 .text-fail { color: lightcoral }
