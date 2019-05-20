@@ -1,11 +1,12 @@
 .contest-card {
+  width: 8em;
   margin: 0 0 1.5em;
   padding: .5em 1.75em;
   display: flex;
   position: relative;
   background-color: #1d1d1d;
-  border: 1px solid #d6d6d6;
   border-radius: 5px;
+  box-shadow: 0px 7px 9px #3535354f;
   text-decoration: none;
   font-size: 1.5em;
   justify-content: space-between;
@@ -33,6 +34,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .rack-display {
@@ -45,39 +47,36 @@
   letter-spacing: -1px;
   color: #658a81;
   background-color: #a5bebf;
-  border: 8px solid #171717;
+  border: 8px solid #2f2f2f;
   border-radius: 10px;
   box-shadow: inset 1px 4px 5px #386537;
-  text-shadow: 0px 0px 14px #bfffd3;
+  text-shadow: 0px 0px 14px #629688;
 }
 
 .rack-btn {
   width: 6em;
   height: 4em;
-  margin: 1em 0 0 1em;
+  margin: 0.3em 0 0 2em;
   position: relative;
-  background: none;
-  border-bottom: 4em solid #7d7d7d;
-  border-top: none;
-  border-left: 1em solid transparent;
-  border-right: 1em solid transparent;
-  border-radius: 5px;
+  border: 4px solid #444343;
+  border-radius: 0 0 5px 5px;
+  background-color: #444343;
   cursor: pointer;
   transition: all .25s;
 }
 .rack-btn > p {
   margin: 0;
   width: 80%;
-  height: 2em;
+  height: 1.75em;
   position: absolute;
   top: -2px;
   left: 0;
   padding: 10%;
-  transform: perspective(200px) rotateX(40deg);
   font-variant: all-small-caps;
   font-weight: bold;
   font-size: 1.3em;
-  background-color: #c5c5c5;
+  background-color: #e09972;
+  border-bottom: 7px solid #b5714c;
   border-radius: 4px;
   transition: all .25s;
 }
@@ -89,6 +88,9 @@
 }
 .rack-btn:hover > p,
 .rack-btn:active > p {
+  border-bottom-width: 0;
+  box-shadow: inset 0px 0px 6px #252525;
+  background-color: #c08261;
   margin-top: .5em;
 }
 
@@ -106,6 +108,10 @@
   text-align: center;
 }
 
+.contest-card-stats {
+  margin-top: .5em;
+}
+
 .rack-display-header {
   margin: 0;
   align-self: center;
@@ -113,54 +119,38 @@
   font-variant: all-small-caps;
 }
 
-.contest-ongoing {
-  margin: 0 0 1.5em;
-  border: 1px solid #d6d6d6;
-  border-radius: 5px;
-  text-decoration: none;
-  flex-basis: 20em;
-  flex-grow: 1;
-  font-variant: all-small-caps;
-  font-size: 1.5em;
+.rack-content {
+  flex: 6;
 }
 
-.contest-ongoing h3 {
+.rack-meter {
+  padding: 0 .5em 0 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #424242;
-  color: #e9e4e6;
-  border: 0;
-  text-shadow: none;
-  border-radius: 5px 5px 0 0;
+  flex-direction: column-reverse;
+  flex: 1;
+  justify-content: center;
+}
+.rack-meter-row { display: flex; margin: .25em 0 0 }
+
+.rack-led {
+  width: 10px;
+  height: 10px;
+  margin: 0 .25em;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: inset -1px -1px 6px #0a0a0aab;
 }
 
-.contest-ongoing h3 i {
-  margin: 0 7px 0 0;
-}
+.led-red { background-color: darkred }
+.led-red.led-on { background-color: red; box-shadow: 0px 0px 10px red }
+.led-yellow { background-color: darkkhaki }
+.led-yellow.led-on { background-color: yellow; box-shadow: 0px 0px 10px yellow }
+.led-green { background-color: darkgreen }
+.led-green.led-on { background-color: green; box-shadow: 0px 0px 10px green }
 
-.contest-ongoing h3 p {
-  margin: 0;
-}
 
-.contest-ongoing:hover .stats {
-  background: #007880;
-}
+.led-on { filter: brightness(2) }
 
-.contest-ongoing:active h3 {
-  background-color: #2d2d2d;
-}
-
-.stats {
-  padding: 5px 10px;
-  font-size: .7em;
-  font-weight: bold;
-  text-align: right;
-  color: #fff;
-  background: #313131;
-  border-radius: 0 0 5px 5px;
-  transition: all .2s;
-}
 
 .contest-status {
   font-size: 0.5em;
@@ -172,5 +162,13 @@
 @media only screen and (max-width: 425px) {
   .contest-ongoing h3 {
     font-size: 0.9em;
+  }
+
+  .contest-card-stats {
+    margin-bottom: .5em;
+  }
+
+  .rack-meter {
+    justify-content: flex-end;
   }
 }

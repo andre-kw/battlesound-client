@@ -1,9 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import { EyeCandyMeter } from '../components/Utils';
 import config from '../config';
 import './ContestCard.css';
 
-export default class ContestCard extends React.Component {
+class ContestCard extends React.Component {
+  redirect = (id) => {
+    return this.props.history.push('/contest/' + id);
+  }
+
   render() {
     let iconClass;
     let countSubs = parseInt(this.props.contest.count_subs),
@@ -36,15 +41,20 @@ export default class ContestCard extends React.Component {
 
     return (
       <article className="contest-card">
-        <h3 className="rack-display rack-display-header">{this.props.contest.title}</h3>
-        <div className="flex-break"></div>
+        <EyeCandyMeter litness="7" />
+        <div className="rack-content">
+          <h3 className="rack-display rack-display-header">{this.props.contest.title}</h3>
+          <div className="flex-break"></div>
 
-        <div className="contest-card-stats">
-          <p className="rack-display" data-label="submissions">500</p>
-          <p className="rack-display" data-label="votes">0</p>
-          <button className="rack-btn"><p>Visit</p></button>
+          <div className="contest-card-stats">
+            <p className="rack-display" data-label="submissions">500</p>
+            <p className="rack-display" data-label="votes">0</p>
+            <button onClick={() => this.redirect(this.props.contest.id)} className="rack-btn"><p>Visit</p></button>
+          </div>
         </div>
       </article>
     );
   }
 }
+
+export default withRouter(ContestCard);

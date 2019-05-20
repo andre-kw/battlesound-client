@@ -51,6 +51,31 @@ export function EyeCandyBanner(props) {
   );
 }
 
+export function EyeCandyMeter(props) {
+  let jsx = [];
+
+  for(let i = 0; i < 8; i++) {
+    let classColor;
+
+    if(i >= 5) {
+      classColor = 'red';
+    } else if(i <= 1) {
+      classColor = 'green';
+    } else {
+      classColor = 'yellow';
+    }
+
+    jsx.push(
+      <div className="rack-meter-row">
+        <div className={`rack-led led-${classColor} ${props.litness > i ? 'led-on' : ''}`}></div>
+        <div className={`rack-led led-${classColor} ${props.litness > i ? 'led-on' : ''}`}></div>
+      </div>
+    )
+  }
+
+  return <div className="rack-meter">{jsx}</div>;
+}
+
 export function PrivateRoute({ component, ...props }) {
   const Component = component
   return (
