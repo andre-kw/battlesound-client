@@ -14,6 +14,19 @@ const ContestsService = {
         (! res.ok) ? res.json().then(e => Promise.reject(e)) : res.json()
       )
   },
+
+  getContestById(contestId) {
+    return fetch(`${config.API_ENDPOINT}/contests/${contestId}`, {
+      headers: {
+        'Authorization': `Bearer ${TokenService.getAuthToken()}`
+      }
+    })
+      .then(res => {
+        return (! res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json();
+      })
+  }
 };
 
 export default ContestsService;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ContestsService from '../services/contests';
 import AppContext from '../components/AppContext';
 import ContestLink from '../components/ContestLink';
 import { Loader } from '../components/Utils';
@@ -10,11 +9,7 @@ export default class HomePage extends React.Component {
   static contextType = AppContext;
 
   componentDidMount() {
-    ContestsService.getContests(this.context.user.id)
-      .then(contests => {
-        this.context.setLoading(false);
-        this.context.setContests(contests);
-      });
+    this.context.getContests();
   }
 
   render() {

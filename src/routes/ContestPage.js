@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ContestSubmitPage from './ContestSubmitPage';
+import TokenService from '../services/token';
+import ContestsService from '../services/contests';
+import VotesService from '../services/votes';
 import AppContext from '../components/AppContext';
+import ContestSubmitPage from './ContestSubmitPage';
+import ContestWinnersPage from './ContestWinnersPage';
 import ContestSubmission from '../components/ContestSubmission';
 import SCPlayer from '../components/SCPlayer';
 import {Loader, Breadcrumb, Alert} from '../components/Utils';
-import TokenService from '../services/token';
-import config from '../config';
 import './ContestPage.css';
-import ContestWinnersPage from './ContestWinnersPage';
 
 export default class ContestPage extends React.Component {
   static contextType = AppContext;
@@ -26,64 +27,37 @@ export default class ContestPage extends React.Component {
     this.context.setLoading(true);
     const id = parseInt(this.props.match.params.id) || 0;
 
-    fetch(`${config.API_ENDPOINT}/contests/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${TokenService.getAuthToken()}`
-      }
-    })
-      .then(res => {
-        return (! res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json();
-      })
+    ContestsService.getContestById(id)
       .then(contest => {
         this.context.setContest(contest);
         this.context.setLoading(false);
 
-        if(contest.subs) {
-          this.context.setSelectedSub(0);
-        }
+        if(contest.subs) this.context.setSelectedSub(0);
       })
       .catch(err => {console.log(err);});
-
-      /*let index = this.context.contests.findIndex(c => c.id === id);
-      this.context.setContest(this.context.contests[index]);
-      this.context.setLoading(false);*/
     }
 
   voteForSub = () => {
-    let listenedToAll = true;
-
     this.context.submissions.forEach(s => {
       if(! s.listened) {
-        listenedToAll = false;
+        this.context.setError('You need to listen to all submissions before you can vote.');
+        return;
       }
     });
 
-    if(listenedToAll) {
-      fetch(`${config.API_ENDPOINT}/votes/${this.context.contest.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${TokenService.getAuthToken()}`
-        },
-        body: JSON.stringify({
-          user_id: this.context.user.id,
-          contest_id: this.context.contest.id,
-          submission_id: this.context.submissions[this.context.selectedSubIndex].id
-        })
+    const postBody = {
+      user_id: this.context.user.id,
+      contest_id: this.context.contest.id,
+      submission_id: this.context.submissions[this.context.selectedSubIndex].id
+    };
+
+    VotesService.castVote(this.context.contest.id, postBody)
+      .then(json => {
+        if(json.error) this.context.setError(json.error);
+
+        console.log(json);
       })
-        .then(res => res.json())
-        .then(json => {
-          if(json.error) {
-            this.context.setError(json.error);
-          }
-          console.log(json);
-        })
-        .catch(err => {console.log(err);});
-    } else {
-      this.context.setError('You need to listen to all submissions before you can vote.');
-    }
+      .catch(err => { console.log(err) });
   }
 
   redirect = () => {

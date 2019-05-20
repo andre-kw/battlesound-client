@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TokenService from '../services/token';
 import AuthService from '../services/auth';
+import ContestsService from '../services/contests';
 
 const AppContext = React.createContext({
   isUserLoggedIn: TokenService.hasAuthToken(),
@@ -17,6 +18,7 @@ const AppContext = React.createContext({
   setContest: () => {},
   setSelectedSub: () => {},
   setError: () => {},
+  getContests: () => {}
 });
 
 export default AppContext;
@@ -104,6 +106,14 @@ export class AppProvider extends Component {
     this.setState({error});
   }
 
+  getContests = () => {
+    return ContestsService.getContests(this.context.user.id)
+      .then(contests => {
+        this.setLoading(false);
+        this.setContests(contests);
+      });
+  }
+
   render() {
     const value = {
       loading: this.state.loading,
@@ -122,6 +132,7 @@ export class AppProvider extends Component {
       setContests: this.setContests,
       setSelectedSub: this.setSelectedSub,
       setError: this.setError,
+      getContests: this.getContests,
     }
 
     return (
