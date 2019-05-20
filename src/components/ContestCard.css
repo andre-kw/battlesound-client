@@ -1,3 +1,118 @@
+.contest-card {
+  margin: 0 0 1.5em;
+  padding: .5em 1.75em;
+  display: flex;
+  position: relative;
+  background-color: #1d1d1d;
+  border: 1px solid #d6d6d6;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.5em;
+  justify-content: space-between;
+  flex-basis: 20em;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+
+.contest-card:before,
+.contest-card:after {
+  display: block;
+  content: ' ';
+  position: absolute;
+  top: 0;
+  width: 1em;
+  height: 100%;
+  background-image: url(/img/grain.jpg);
+  box-shadow: inset 0px -20px 15px 0px #0000007a;
+  border-radius: 4px;
+}
+.contest-card:before { left: 0 }
+.contest-card:after { right: 0 }
+
+.contest-card-stats {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rack-display {
+  margin: 0 0 .7em .5em;
+  padding: 0.25em 0.5em;
+  position: relative;
+  font-family: 'Alarm Clock';
+  font-size: 1em;
+  text-align: center;
+  letter-spacing: -1px;
+  color: #658a81;
+  background-color: #a5bebf;
+  border: 8px solid #171717;
+  border-radius: 10px;
+  box-shadow: inset 1px 4px 5px #386537;
+  text-shadow: 0px 0px 14px #bfffd3;
+}
+
+.rack-btn {
+  width: 6em;
+  height: 4em;
+  margin: 1em 0 0 1em;
+  position: relative;
+  background: none;
+  border-bottom: 4em solid #7d7d7d;
+  border-top: none;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all .25s;
+}
+.rack-btn > p {
+  margin: 0;
+  width: 80%;
+  height: 2em;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  padding: 10%;
+  transform: perspective(200px) rotateX(40deg);
+  font-variant: all-small-caps;
+  font-weight: bold;
+  font-size: 1.3em;
+  background-color: #c5c5c5;
+  border-radius: 4px;
+  transition: all .25s;
+}
+.rack-btn:hover,
+.rack-btn:active {
+  padding-top: .75em;
+  height: 4em;
+  border-bottom-width: 3.25em;
+}
+.rack-btn:hover > p,
+.rack-btn:active > p {
+  margin-top: .5em;
+}
+
+.contest-card-stats .rack-display:after {
+  display: block;
+  content: attr(data-label);
+  position: absolute;
+  bottom: -1.75em;
+  left: -30%;
+  font-size: 0.45em;
+  width: 160%;
+  font-family: 'courier new';
+  letter-spacing: initial;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.rack-display-header {
+  margin: 0;
+  align-self: center;
+  font-size: 1.4em;
+  font-variant: all-small-caps;
+}
+
 .contest-ongoing {
   margin: 0 0 1.5em;
   border: 1px solid #d6d6d6;

@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Cinzel+Decorative|Source+Sans+Pro');
 
+@font-face {
+  font-family: 'Alarm Clock';
+  src: url('/fonts/alarm clock.ttf')
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -223,6 +228,8 @@ section.login {
 }
 
 .icon { margin: 0 4px 0 0; }
+
+.flex-break { width: 100% }
 
 
 

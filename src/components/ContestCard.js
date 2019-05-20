@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import config from '../config';
 import './ContestCard.css';
 
-export default class ContestLink extends React.Component {
+export default class ContestCard extends React.Component {
   render() {
     let iconClass;
     let countSubs = parseInt(this.props.contest.count_subs),
@@ -21,17 +21,30 @@ export default class ContestLink extends React.Component {
       iconClass = 'fa-thermometer-empty text-muted';
     }
     
-    return (
-      <Link to={'/contest/' + this.props.contest.id} className="contest-ongoing">
-        <h3>
-          <p><i className={`fas ${iconClass}`}></i> {this.props.contest.title}</p>
-          <p className="contest-status">{this.props.contest.user_vote ? <i className="fas fa-vote-yea"></i> : ''}</p>
-        </h3>
+    // return (
+    //   <Link to={'/contest/' + this.props.contest.id} className="contest-ongoing">
+    //     <h3>
+    //       <p><i className={`fas ${iconClass}`}></i> {this.props.contest.title}</p>
+    //       <p className="contest-status">{this.props.contest.user_vote ? <i className="fas fa-vote-yea"></i> : ''}</p>
+    //     </h3>
 
-        <div className="stats">
-          <span className="stats-count">{countSubs} submissions · {countVotes} votes</span>
+    //     <div className="stats">
+    //       <span className="stats-count">{countSubs} submissions · {countVotes} votes</span>
+    //     </div>
+    //   </Link>
+    // );
+
+    return (
+      <article className="contest-card">
+        <h3 className="rack-display rack-display-header">{this.props.contest.title}</h3>
+        <div className="flex-break"></div>
+
+        <div className="contest-card-stats">
+          <p className="rack-display" data-label="submissions">500</p>
+          <p className="rack-display" data-label="votes">0</p>
+          <button className="rack-btn"><p>Visit</p></button>
         </div>
-      </Link>
+      </article>
     );
   }
 }

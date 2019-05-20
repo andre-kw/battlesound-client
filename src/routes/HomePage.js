@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppContext from '../components/AppContext';
-import ContestLink from '../components/ContestCard';
+import ContestCard from '../components/ContestCard';
 import { Loader } from '../components/Utils';
 import './HomePage.css';
 
@@ -21,10 +21,10 @@ export default class HomePage extends React.Component {
             <Link to="/contest/create" className="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
           </header>
 
-          <div className="section-contest-cards">
+          <div className="contest-cards">
             {this.context.contests.length === 0 && !this.context.loading 
               ? <p className="alert">There are no active contests. Why not create one?</p> 
-              : this.context.contests.map(c => <ContestLink key={c.id} contest={c} />)}
+              : this.context.contests.map(c => <ContestCard key={c.id} contest={c} />)}
           </div>
         </section>
       </div>
