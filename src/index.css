@@ -169,7 +169,6 @@ section > header {
 }
 
 .page-container {
-  max-width: 90vw;
   margin: 0 auto 5em;
   border: 1px solid #75d9fd;
   box-shadow: 1px 8px 8px 0px #dadada;
@@ -252,7 +251,7 @@ section.login {
 
 @media only screen and (max-width: 768px) {
   main {
-    padding: 0 5%;
+    padding: 0;
   }
 }
 
