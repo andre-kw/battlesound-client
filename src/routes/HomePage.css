@@ -18,7 +18,8 @@
 }
 
 .contest-list {
-  background: linear-gradient(#fff, rgba(255, 255, 255, 0)), #f7f7f7 url(/img/coat.png) no-repeat -7em -3em;
+  /* background: linear-gradient(#fff, rgba(255, 255, 255, 0)), #f7f7f7 url(/img/coat.png) no-repeat -7em -3em; */
+  background: linear-gradient(#dcf1f9, rgba(255, 255, 255, 0)), #dbecef url(/img/coat.png) no-repeat -7em -3em;
 }
 
 
