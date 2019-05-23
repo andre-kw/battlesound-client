@@ -108,6 +108,16 @@ th {
   text-align: left;
 }
 
+small,
+small > a:link,
+small > a:visited {
+  color: gray;
+}
+
+small {
+  font-size: 1em;
+}
+
 input[type="submit"] { cursor: pointer; height: 3em }
 
 input[type="submit"]:not([disabled]) {

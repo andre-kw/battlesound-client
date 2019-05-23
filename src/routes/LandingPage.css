@@ -1,4 +1,6 @@
-section.landing {
+.landing,
+.landing-about {
+  padding: 2em;
   background-color: transparent;
   text-align: center;
 }
@@ -8,12 +10,14 @@ section.landing {
 }
 
 .btn.btn-landing {
+  max-width: 12em;
+  margin: 3em auto 1em;
   color: #fff;
-  background-color: #64b4c5;
+  background-color: #57cbff;
   font-size: 1.25em;
+  font-weight: bold;
   display: block;
-  margin: 2em 0;
-  border-bottom: 5px solid #378da0;
+  border-bottom: 7px solid #2fb1ea;
 }
 
 #s-bg {
@@ -25,4 +29,20 @@ section.landing {
   z-index: -555;
   background: url(/img/swords.svg) no-repeat center;
   opacity: 0.4;
+}
+
+.landing-about h2 {
+  margin: 1em;
+  font-size: 2.5em;
+  font-variant: all-small-caps;
+  color: #505050;
+}
+
+.landing-about p {
+  max-width: 28em;
+  margin: 0 auto 2em;
+  font-size: 1.4em;
+  text-align: left;
+  line-height: 2em;
+  color: #505050;
 }
