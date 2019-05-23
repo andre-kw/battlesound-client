@@ -24,6 +24,10 @@
 
 
 @media only screen and (max-width: 425px) {
+  .contest-cards {
+    padding: 1em 1em 0;
+  }
+  
   .header-w-link h2 {
     font-size: 1.6em;
   }

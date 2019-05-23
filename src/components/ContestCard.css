@@ -4,8 +4,8 @@
   padding: .5em 1.75em;
   display: flex;
   position: relative;
-  background: linear-gradient(#4e3c23,#312617);
-  border-bottom: 5px solid #2f1d12;
+  background: linear-gradient(#f3f3f3,#d6d6d6);
+  border-bottom: 5px solid #b7b7b7;
   border-radius: 5px;
   box-shadow: 0px 7px 9px #3535354f;
   text-decoration: none;
@@ -49,7 +49,7 @@
   letter-spacing: -1px;
   color: #658a81;
   background-color: #a5bebf;
-  border: 8px solid #352a1a;
+  border: 8px solid #e0deda;
   border-radius: 10px;
   box-shadow: inset 1px 4px 5px #386537;
   text-shadow: 0px 0px 14px #629688;
@@ -60,9 +60,9 @@
   height: 4em;
   margin: 0.3em 0 0 2em;
   position: relative;
-  border: 4px solid #444343;
+  border: 4px solid #656565;
   border-radius: 0 0 5px 5px;
-  background-color: #444343;
+  background-color: #656565;
   cursor: pointer;
   transition: all .25s;
 }
@@ -77,8 +77,8 @@
   font-variant: all-small-caps;
   font-weight: bold;
   font-size: 1.3em;
-  background-color: #e09972;
-  border-bottom: 7px solid #b5714c;
+  background-color: #ffe09e;
+  border-bottom: 7px solid #f7a97f;
   border-radius: 4px;
   transition: all .25s;
 }
@@ -86,7 +86,6 @@
 .rack-btn:active {
   padding-top: .75em;
   height: 4em;
-  border-bottom-width: 3.25em;
 }
 .rack-btn:hover > p,
 .rack-btn:active > p {
@@ -106,7 +105,7 @@
   width: 160%;
   font-family: 'courier new';
   letter-spacing: initial;
-  color: #f1f1f1;
+  color: #656565;
   text-align: center;
 }
 
