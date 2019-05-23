@@ -1,25 +1,42 @@
 .contest-cards {
-  padding: 1em 3em 0;
+  padding: 2em;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.header-home {
-  border-top: 0;
+.contest-list-header {
+  min-height: 10em;
+  padding: 2em 2em 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background: linear-gradient(#ffffff9d, #f9f9f9), #dde2e2 url(/img/coat.png) no-repeat -7em -3em;
 }
 
-.header-home h2 {
+.contest-list-header h2 {
   margin: 0;
   flex: 8 1;
-  color: #4a4a4a;
+  color: #000;
   font-size: 2.4em;
   font-family: cinzel decorative;
+  text-shadow: 
+    3px 2px 4px #dadada, 
+    -2px -2px 8px #757575;
 }
 
 .contest-list {
   /* background: linear-gradient(#fff, rgba(255, 255, 255, 0)), #f7f7f7 url(/img/coat.png) no-repeat -7em -3em; */
-  background: linear-gradient(#dcf1f9, rgba(255, 255, 255, 0)), #dbecef url(/img/coat.png) no-repeat -7em -3em;
+}
+
+.btn.btn-create {
+  background-color: #31a6c1;
+  color: #fff;
+}
+
+@media only screen and (max-width: 768px) {
+  .contest-list-header { border-top: 1px solid #b9b9b9 }
 }
 
 
@@ -28,8 +45,8 @@
     padding: 1em 1em 0;
   }
   
-  .header-w-link h2 {
-    font-size: 1.6em;
+  .contest-list-header h2 {
+    font-size: 9vw;
   }
 
   .btn-create { width: 100%; margin: 1em 0 0 0; }

@@ -15,12 +15,12 @@ export default class HomePage extends React.Component {
   render() {
     let jsx = (
       <div className="page-container">
-        <section className="contest-list">
-          <header className="header-home">
-            <h2>Battlegrounds</h2>
-            <Link to="/contest/create" className="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
-          </header>
+        <section className="contest-list-header">
+          <h2>Battlegrounds</h2>
+          <Link to="/contest/create" className="btn btn-create"><i className="fas fa-plus-square"></i>Create contest</Link>
+        </section>
 
+        <section className="contest-list">
           <div className="contest-cards">
             {this.context.contests.length === 0 && !this.context.loading 
               ? <p className="alert">There are no active contests. Why not create one?</p> 

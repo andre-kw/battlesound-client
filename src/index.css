@@ -214,12 +214,6 @@ section.login {
 
 .btn i { margin: 0 6px 0 0 }
 
-.btn.btn-create {
-  margin: 1em auto 0;
-  background-color: #31a6c1;
-  color: #fff;
-}
-
 .text-success { color: rgb(0, 197, 0) }
 .text-fail { color: lightcoral }
 .text-danger { color: red }
@@ -262,6 +256,11 @@ section.login {
 @media only screen and (max-width: 768px) {
   main {
     padding: 0;
+  }
+
+  .page-container {
+    border: 0;
+    box-shadow: none;
   }
 }
 
