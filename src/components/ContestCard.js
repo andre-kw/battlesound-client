@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { EyeCandyMeter } from '../components/Utils';
-import config from '../config';
 import './ContestCard.css';
 
 class ContestCard extends React.Component {
@@ -10,21 +9,21 @@ class ContestCard extends React.Component {
   }
 
   render() {
-    let iconClass;
     let countSubs = parseInt(this.props.contest.count_subs),
-        countVotes = parseInt(this.props.contest.count_votes);
+    countVotes = parseInt(this.props.contest.count_votes);
+    // let iconClass;
 
-    if(countVotes > config.VOTES_THRESHOLD * 3) {
-      iconClass = 'fa-thermometer-full text-danger';
-    } else if(countVotes > config.VOTES_THRESHOLD * 2) {
-      iconClass = 'fa-thermometer-three-quarters text-warning';
-    } else if(countVotes > config.VOTES_THRESHOLD) {
-      iconClass = 'fa-thermometer-half text-warning';
-    } else if(countVotes > 0) {
-      iconClass = 'fa-thermometer-quarter text-warning';
-    } else {
-      iconClass = 'fa-thermometer-empty text-muted';
-    }
+    // if(countVotes > config.VOTES_THRESHOLD * 3) {
+    //   iconClass = 'fa-thermometer-full text-danger';
+    // } else if(countVotes > config.VOTES_THRESHOLD * 2) {
+    //   iconClass = 'fa-thermometer-three-quarters text-warning';
+    // } else if(countVotes > config.VOTES_THRESHOLD) {
+    //   iconClass = 'fa-thermometer-half text-warning';
+    // } else if(countVotes > 0) {
+    //   iconClass = 'fa-thermometer-quarter text-warning';
+    // } else {
+    //   iconClass = 'fa-thermometer-empty text-muted';
+    // }
     
     // return (
     //   <Link to={'/contest/' + this.props.contest.id} className="contest-ongoing">

@@ -66,7 +66,7 @@ export function EyeCandyMeter(props) {
     }
 
     jsx.push(
-      <div className="rack-meter-row">
+      <div className="rack-meter-row" key={`led-${i}`}>
         <div className={`rack-led led-${classColor} ${props.litness > i ? 'led-on' : ''}`}></div>
         <div className={`rack-led led-${classColor} ${props.litness > i ? 'led-on' : ''}`}></div>
       </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TokenService from '../services/token';
-import ContestsService from '../services/contests';
 import VotesService from '../services/votes';
 import AppContext from '../components/AppContext';
 import ContestSubmitPage from './ContestSubmitPage';
@@ -56,7 +55,7 @@ export default class ContestPage extends Component {
   render() {
     let trackId = this.context.submissions.length > 0 ? this.context.submissions[this.context.selectedSubIndex].sc_track_id : 0;
 
-    let votedJsx = <div className="contest-voted"><p>You have voted in this contest.</p></div>;
+    //let votedJsx = <div className="contest-voted"><p>You have voted in this contest.</p></div>;
 
     let nowPlayingNoTracksJsx = (
       <section className="contest-now-playing">
@@ -77,7 +76,7 @@ export default class ContestPage extends Component {
 
     let submissionsJsx = (
       <section className="contest-submissions">
-        <header class="header-submissions">
+        <header className="header-submissions">
           <h3>Submissions</h3>
         </header>
 
